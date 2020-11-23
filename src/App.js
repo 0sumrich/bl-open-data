@@ -1,24 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+// import datasets from './datsets.csv'
+import { useEffect, useState } from 'react'
+import getData from './helper/getData'
 
 function App() {
+  const [data, setData] = useState(null)
+  useEffect(() => {
+    const fetchData = async () => {
+      const d = await getData()
+      setData(d)
+    };
+
+    fetchData();
+  }, []);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
+    <header className="App-header">
+      <p>
+        Edit <code>{data}</code> and save to reload.
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    </header>
   );
 }
 
