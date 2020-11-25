@@ -2,11 +2,13 @@
 import { useEffect, useState } from 'react'
 import getData from './helper/getData'
 
+
 function App() {
-  const [data, setData] = useState(null)
+  const [data, setData] = useState([])
   useEffect(() => {
     const fetchData = async () => {
       const d = await getData()
+      // const d = await fetch('https://open.barnet.gov.uk/api/*')
       setData(d)
     };
 
@@ -15,7 +17,7 @@ function App() {
   return (
     <header className="App-header">
       <p>
-        Edit <code>{data}</code> and save to reload.
+        <code>{data.length>0 ? 'Loaded' : '....'}</code>
         </p>
     </header>
   );
