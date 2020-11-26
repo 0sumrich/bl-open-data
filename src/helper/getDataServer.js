@@ -1,13 +1,12 @@
-const {csvParse} = require('d3')
-const {DateTime} = require('luxon')
-const {canUseDOM} = require('exenv')
+const { csvParse } = require('d3')
+const { DateTime } = require('luxon')
 const fetch = require('isomorphic-unfetch')
 const fs = require('fs')
 const path = require('path')
 
 
 const getDatasets = () => {
-    const file = fs.readFileSync(path.join(__dirname, '..', '..', 'public','datasets.csv'))
+    const file = fs.readFileSync(path.join(__dirname, '..', '..', 'public', 'datasets.csv'))
     return csvParse(file.toString())
 }
 const insertAt = (str, sub, pos) => `${str.slice(0, pos)}${sub}${str.slice(pos)}`;
@@ -22,7 +21,7 @@ const headers = {
     Origin: process.env.PUBLIC_URL
 }
 const opts = { headers }
-const fetchCors = async url => await fetch(canUseDOM ? corsUrl + url : url, opts)
+const fetchCors = async url => await fetch(url, opts)
 
 module.exports = async function getData() {
     const datasets = getDatasets()
