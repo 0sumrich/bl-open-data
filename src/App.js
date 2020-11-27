@@ -3,8 +3,8 @@ import Grid from '@material-ui/core/Grid'
 import Header from "./components/header"
 import SideNav from './components/sideNav'
 import ContentWrapper from './components/contentWrapper'
-import writeFigures from './helper/writeFigures'
-import getData from './helper/getData'
+import writeFigures from './functions/writeFigures'
+import getData from './functions/getData'
 
 const isDev = process.env.NODE_ENV
 // const isDev = false

@@ -1,5 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles';
-import makeId from '../helper/makeId'
+import makeId from '../functions/makeId'
 import ChartWrapper from './chartWrapper';
 
 const useStyles = makeStyles(theme => ({

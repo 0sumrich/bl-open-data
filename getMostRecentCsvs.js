@@ -1,6 +1,6 @@
 const path = require('path');
 const fs = require('fs')
-const getData = require('./src/helper/getDataServer')
+const getData = require('./src/functions/getDataServer')
 const createCsvWriter = require('csv-writer').createObjectCsvWriter   
 
 async function writeCsv(records, fn) {
