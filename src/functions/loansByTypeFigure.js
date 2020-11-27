@@ -21,7 +21,6 @@ function traces(grouped) {
         x: unpack(g.data, 'Month'),
         y: unpack(g.data, 'Loans'),
         type: 'scatter',
-        // mode: 'markers+lines',
         mode: 'lines',
         name: g.Type,
         text: g.Type,
