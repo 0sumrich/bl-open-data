@@ -1,6 +1,4 @@
 import { makeStyles } from '@material-ui/core/styles';
-import makeId from '../functions/makeId'
-import ChartWrapper from './chartWrapper';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -10,11 +8,11 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-function ContentWrapper({ figures }) {
+function ContentWrapper({ children }) {
     const classes = useStyles()
     return (
         <div className={classes.root}>
-            {figures.map(fig => <ChartWrapper key={makeId(fig.layout.title)} data={fig.data} layout={fig.layout} id={makeId(fig.layout.title)} />)}
+            {children}
         </div>
     )
 }

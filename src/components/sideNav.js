@@ -2,7 +2,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Hidden from '@material-ui/core/Hidden';
-import makeId from '../functions/makeId'
+import { makeId } from '../functions/helper'
 import Scrollspy from 'react-scrollspy'
 
 const useStyles = makeStyles(theme => {

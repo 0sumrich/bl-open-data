@@ -1,10 +1,10 @@
-import loansByTypeFigure from './loansByTypeFigure'
+import loansByTypeFigure from './loansByTypeDraw'
 
 function writeFigures(data) {
     if (data.length < 1) {
         return []
     }
-    const getDataByTitle = title => data[data.map(o => o.title).indexOf(title)]
+    
     return [
         loansByTypeFigure(getDataByTitle('Library loans'))
     ]
