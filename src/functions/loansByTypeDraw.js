@@ -1,25 +1,26 @@
 import { rollup, sum } from 'd3-array';
 import { keepKeys, unpack } from './helper';
+import { select } from 'd3-selection'
 
 function groupData(initData) {
-    const keys = ['Month', 'Type', 'Loans'];
-    const data = keepKeys(initData.data, keys);
-    return Array.from(
-        rollup(
-            data,
-            d => sum(d.map(d => +d.Loans)),
-            d => d.Type,
-            d => d.Month
-        ),
-        ([Type, m]) => ({
-            Type, data: Array.from(m, ([Month, Loans]) => ({ Month, Loans }))
-        })
-    );
+	const keys = ['Month', 'Type', 'Loans'];
+	const data = keepKeys(initData.data, keys);
+	return Array.from(
+		rollup(
+			data,
+			d => sum(d.map(d => +d.Loans)),
+			d => d.Type,
+			d => d.Month
+		),
+		([Type, m]) => ({
+			Type, data: Array.from(m, ([Month, Loans]) => ({ Month, Loans }))
+		})
+	);
 }
 
-function draw(data){
-    // data.Type data.data > data.data[0] = Month, and Loans
-    console.log('hello')
+function draw(data, id) {
+	// data.Type data.data > data.data[0] = Month, and Loans
+	const svg = select(id)
 }
 
 /*
@@ -175,5 +176,5 @@ export default function ages(data) {
 */
 
 export {
-    groupData, draw
+	groupData, draw
 }

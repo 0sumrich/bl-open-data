@@ -10,7 +10,7 @@ const useStyles = makeStyles(theme => ({
 
 const Svg = ({ data, id, draw }) => {
 	useEffect(() => {
-		draw(data)
+		draw(data, id)
     })
     const classes = useStyles()
 	return <svg id={id} className={classes.root}/>

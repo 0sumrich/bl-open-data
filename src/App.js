@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, Children } from 'react'
 import Grid from '@material-ui/core/Grid'
 import Header from "./components/header"
 import SideNav from './components/sideNav'
@@ -38,13 +38,15 @@ function App() {
         <Header siteTitle='Barnet Libraries' subTitle='Open data' />
         <ContentWrapper>
           {
-            charts.map(({ title, component }, i) => (
-              <ChartWrapper key={`chart${i}`}>
-                <section id={makeId(title)}>
-                  {data.length > 0 ? component({ title }) : null}
-                </section>
-              </ChartWrapper>
-            )
+            Children.toArray(
+              charts.map(({ title, component }, i) => (
+                <ChartWrapper key={`chart${i}`}>
+                  <section id={makeId(title)}>
+                    {data.length > 0 ? component({ title }) : null}
+                  </section>
+                </ChartWrapper>
+              )
+              )
             )
           }
         </ContentWrapper>
