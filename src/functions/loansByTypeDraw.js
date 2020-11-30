@@ -4,6 +4,8 @@ import { select } from 'd3-selection'
 import { scaleLinear } from 'd3-scale'
 import { min, max } from 'd3-array'
 import { line } from 'd3-shape'
+// d3.schemeTableau10
+import {schemeTableau10} from 'd3-scale-chromatic'
 import { DateTime } from 'luxon'
 const d3 = {
 	select,
@@ -11,7 +13,8 @@ const d3 = {
 	scaleTime,
 	min,
 	max,
-	line
+	line,
+	schemeTableau10
 }
 
 function groupData(initData) {
@@ -65,6 +68,9 @@ function draw(inputData, id) {
 	const line = d3.line()
 		.x(d => x(d.Month))
 		.y(d => y(d.Loans))
+
+	const colors = d3.schemeTableau10
+	
 }
 
 /*
