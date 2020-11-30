@@ -1,6 +1,18 @@
 import { rollup, sum } from 'd3-array';
 import { keepKeys, unpack } from './helper';
 import { select } from 'd3-selection'
+import { scaleLinear } from 'd3-scale'
+import { min, max } from 'd3-array'
+import { line } from 'd3-shape'
+import { DateTime } from 'luxon'
+const d3 = {
+	select,
+	scaleLinear,
+	scaleTime,
+	min,
+	max,
+	line
+}
 
 function groupData(initData) {
 	const keys = ['Month', 'Type', 'Loans'];
@@ -18,9 +30,41 @@ function groupData(initData) {
 	);
 }
 
-function draw(data, id) {
+function endOfMonth(monthString) {
+	return DateTime.fromISO(monthString).plus({ months: 1, days: - 1 }).toJSDate()
+}
+
+function dataDates(d) {
+	d.forEach(row => {
+		row.data.forEach(r => {
+			const month = r.Month
+			const jsDate = endOfMonth(month)
+			r.Month = jsDate
+		})
+	})
+	return d
+}
+
+const minMax = arr => [min(arr), max(arr)]
+
+function draw(inputData, id) {
+	const data = dataDates(inputData)
+	const months = data.map(o => o.data.map(x => x.Month))[0]
+	const loans = data.map(o => o.data.map(x => x.Loans))[0]
 	// data.Type data.data > data.data[0] = Month, and Loans
-	const svg = select(id)
+	const svg = d3.select(`#${id}`)
+	const margin = { top: 30, right: 50, bottom: 60, left: 70 };
+	const width = parseInt(svg.style('width')) - margin.left - margin.right;
+	const height = parseInt(svg.style('height')) - margin.top - margin.bottom;
+	const x = d3.scaleTime()
+		.domain(minMax(months))
+		.range([0, width])
+	const y = d3.scaleLinear()
+		.domain([minMax(loans)])
+		.range(height, 0)
+	const line = d3.line()
+		.x(d => x(d.Month))
+		.y(d => y(d.Loans))
 }
 
 /*
@@ -32,7 +76,7 @@ import sortData from './sortData';
 export default function ages(data) {
 	const margin = { top: 30, right: 50, bottom: 60, left: 70 };
 	const width = 950 - margin.left - margin.right;
-	const height = 600 - margin.top - margin.bottom;
+	const height = 600 - margin.top - margin.bottom;  
 	const x = d3.scaleLinear().range([0, width]);
 	const y = d3.scaleLinear().range([0, height]);
 
