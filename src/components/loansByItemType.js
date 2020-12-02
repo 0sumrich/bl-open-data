@@ -1,15 +1,13 @@
 // import Svg from './svg'
-import { useEffect, useState } from 'react'
-import { groupData, draw } from '../functions/loansByTypeDraw'
-import { select, selectAll } from 'd3-selection'
+import { useEffect, useState, Children } from 'react'
+import { groupData } from '../functions/loansByTypeDraw'
 import { makeStyles } from '@material-ui/core/styles';
-import { rollup, sum } from 'd3-array';
-import { keepKeys, unpack, makeId } from '../functions/helper';
-// import { select } from 'd3-selection'
+import Tooltip from '@material-ui/core/Tooltip';
+import { makeId } from '../functions/helper';
+import { select, selectAll } from 'd3-selection'
 import { scaleLinear, scaleTime, scaleOrdinal } from 'd3-scale'
 import { min, max } from 'd3-array'
 import { line } from 'd3-shape'
-// d3.schemeTableau10
 import { schemeTableau10 } from 'd3-scale-chromatic'
 import { DateTime } from 'luxon'
 const d3 = {
@@ -88,20 +86,36 @@ function LoansByItemType({ data, title }) {
         // .x(d => {debugger;})
         .y(d => y(d.Loans))
     const c = d3.scaleOrdinal().domain(chartData.map(o => o.Type)).range(d3.schemeTableau10)
-    
+    // const MyComponent = React.forwardRef(function MyComponent(props, ref) {
+    //     //  Spread the props to the underlying DOM element.
+    //     return <div {...props} ref={ref}>Bin</div>
+    //   });
+      
+    //   // ...
+      
+    //   <Tooltip title="Delete">
+    //     <MyComponent>
+    //   </Tooltip>
+
     return (
         <svg className={classes.root} id={id} width={width + margin.left + margin.right} height={height + margin.top + margin.bottom}>
             <g style={{
                 transform: `translate(${margin.left}px, ${margin.top}px)`
             }}>
                 {/* lines */}
-                {chartData.map(r =>
-                    <path
-                        stroke={c(r.Type)}
-                        strokeWidth={1.5}
-                        fill='none'
-                        d={line(r.data)}
-                    ></path>
+                {Children.toArray(
+                    chartData.map(r =>
+                        (<>
+                            <Tooltip title='Click to select data'>
+                                <path
+                                    stroke={c(r.Type)}
+                                    strokeWidth={1.5}
+                                    fill='none'
+                                    d={line(r.data)}
+                                ></path>
+                            </Tooltip>
+                        </>)
+                    )
                 )}
             </g>
         </svg>

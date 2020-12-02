@@ -98,9 +98,9 @@ function draw(inputData, id) {
 			.style('cursor', 'pointer')
 			.on("mouseover", e => {
 				handleLineOver(e)
-				const parent = d3
-					.select(`#${id}`).parentNode
-				debugger;
+				const parent = d3.select(d3.select(`#${id}`).node().parentNode)
+				parent.append('div')
+				.attr()
 			})
 			.on('mouseout', handleLineOut)
 
