@@ -1,5 +1,5 @@
 // import Svg from './svg'
-import { useEffect, useState, Children } from 'react'
+import { useEffect, useState, Children, forwardRef, useRef } from 'react'
 import { groupData } from '../functions/loansByTypeDraw'
 import { makeStyles } from '@material-ui/core/styles';
 import Tooltip from '@material-ui/core/Tooltip';
@@ -25,7 +25,7 @@ const useStyles = makeStyles(theme => ({
     root: {
         width: '100%',
         height: '450px',
-    }
+    },
 }));
 
 // function groupData(initData) {
@@ -83,20 +83,20 @@ function LoansByItemType({ data, title }) {
         .range([height, 0])
     const line = d3.line()
         .x(d => x(d.Month))
-        // .x(d => {debugger;})
         .y(d => y(d.Loans))
     const c = d3.scaleOrdinal().domain(chartData.map(o => o.Type)).range(d3.schemeTableau10)
     // const MyComponent = React.forwardRef(function MyComponent(props, ref) {
     //     //  Spread the props to the underlying DOM element.
     //     return <div {...props} ref={ref}>Bin</div>
     //   });
-      
+    const Path = forwardRef((props, ref) => <path {...props} ref={ref}></path>)
+
     //   // ...
-      
+
     //   <Tooltip title="Delete">
     //     <MyComponent>
     //   </Tooltip>
-
+    const lineData = useRef(null)
     return (
         <svg className={classes.root} id={id} width={width + margin.left + margin.right} height={height + margin.top + margin.bottom}>
             <g style={{
@@ -106,13 +106,14 @@ function LoansByItemType({ data, title }) {
                 {Children.toArray(
                     chartData.map(r =>
                         (<>
-                            <Tooltip title='Click to select data'>
-                                <path
+                            <Tooltip placement='top' title='Click to select data'>
+                                <Path
+                                    ref={lineData}
                                     stroke={c(r.Type)}
                                     strokeWidth={1.5}
                                     fill='none'
                                     d={line(r.data)}
-                                ></path>
+                                />
                             </Tooltip>
                         </>)
                     )
