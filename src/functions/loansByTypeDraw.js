@@ -1,15 +1,17 @@
 import { rollup, sum } from 'd3-array';
 import { keepKeys, unpack } from './helper';
 import { select } from 'd3-selection'
-import { scaleLinear } from 'd3-scale'
+import { scaleLinear, scaleTime, scaleOrdinal } from 'd3-scale'
 import { min, max } from 'd3-array'
 import { line } from 'd3-shape'
 // d3.schemeTableau10
-import {schemeTableau10} from 'd3-scale-chromatic'
+import { schemeTableau10 } from 'd3-scale-chromatic'
 import { DateTime } from 'luxon'
+
 const d3 = {
 	select,
 	scaleLinear,
+	scaleOrdinal,
 	scaleTime,
 	min,
 	max,
@@ -53,7 +55,7 @@ const minMax = arr => [min(arr), max(arr)]
 function draw(inputData, id) {
 	const data = dataDates(inputData)
 	const months = data.map(o => o.data.map(x => x.Month))[0]
-	const loans = data.map(o => o.data.map(x => x.Loans))[0]
+	const loans = data.map(o => o.data.map(x => x.Loans)).flat()
 	// data.Type data.data > data.data[0] = Month, and Loans
 	const svg = d3.select(`#${id}`)
 	const margin = { top: 30, right: 50, bottom: 60, left: 70 };
@@ -63,14 +65,56 @@ function draw(inputData, id) {
 		.domain(minMax(months))
 		.range([0, width])
 	const y = d3.scaleLinear()
-		.domain([minMax(loans)])
-		.range(height, 0)
+		.domain(minMax(loans))
+		.range([height, 0])
 	const line = d3.line()
 		.x(d => x(d.Month))
 		.y(d => y(d.Loans))
+	const c = d3.scaleOrdinal().domain(data.map(o => o.Type)).range(d3.schemeTableau10)
+	const chart = d3
+		.select(`#${id}`)
+		.attr("width", width + margin.left + margin.right)
+		.attr("height", height + margin.top + margin.bottom)
+		.append("g")
+		.attr("transform", `translate(${margin.left}, ${margin.top})`);
+	// const handleLineOver = e => {
+	// 	chart.selectAll('.data-line').attr('stroke-opacity', 0.3)
+	// 	d3.select(e.target).attr('stroke-opacity', 1)
+	// }
+	// const handleLineOut = e => chart.selectAll('.data-line').attr('stroke-opacity', 1)
+	const handleLineOver = e => d3.select(e.currentTarget).attr('stroke-width', 2)
+	const handleLineOut = e => d3.select(e.currentTarget).attr('stroke-width', 1.5)
 
-	const colors = d3.schemeTableau10
-	
+	data.forEach(r => {
+		chart
+			.append('path')
+			.attr('stroke', d => {
+				return c(r.Type)
+			})
+			.attr('fill', 'none')
+			.attr('stroke-width', 1.5)
+			.attr('class', 'data-line')
+			.attr('d', line(r.data))
+			.style('cursor', 'pointer')
+			.on("mouseover", e => {
+				handleLineOver(e)
+				const parent = d3
+					.select(`#${id}`).parentNode
+				debugger;
+			})
+			.on('mouseout', handleLineOut)
+
+		chart
+			.append('g')
+			.selectAll('circle')
+			.data(r.data)
+			.join('circle')
+			.attr('r', 1.5)
+			.attr('cx', d => x(d.Month))
+			// .attr('cx', d => {debugger})
+			.attr('cy', d => y(d.Loans))
+			.attr('fill', c(r.Type))
+	})
 }
 
 /*
