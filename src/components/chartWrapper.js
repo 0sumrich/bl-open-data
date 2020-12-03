@@ -11,7 +11,8 @@ const useStyles = makeStyles(theme => ({
         margin: `${theme.spacing(2)}px auto`,
     },
     cardHelper: {
-        padding: theme.spacing(3)
+        padding: theme.spacing(3),
+        position: "relative"
     }
 }));
 

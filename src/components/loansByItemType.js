@@ -2,7 +2,9 @@
 import { useEffect, useState, Children, forwardRef, useRef } from 'react'
 import { groupData } from '../functions/loansByTypeDraw'
 import { makeStyles } from '@material-ui/core/styles';
-import Tooltip from '@material-ui/core/Tooltip';
+import { Typography } from '@material-ui/core';
+// import Tooltip from '@material-ui/core/Tooltip';
+import ChartTip from './chartTip'
 import { makeId } from '../functions/helper';
 import { select, selectAll } from 'd3-selection'
 import { scaleLinear, scaleTime, scaleOrdinal } from 'd3-scale'
@@ -26,23 +28,15 @@ const useStyles = makeStyles(theme => ({
         width: '100%',
         height: '450px',
     },
+    line: {
+        strokeWidth: 1.5,
+        fill: 'none',
+        cursor: 'pointer',
+        '&:hover': {
+            strokeWidth: 2.5
+        }
+    },
 }));
-
-// function groupData(initData) {
-// 	const keys = ['Month', 'Type', 'Loans'];
-// 	const data = keepKeys(initData.data, keys);
-// 	return Array.from(
-// 		rollup(
-// 			data,
-// 			d => sum(d.map(d => +d.Loans)),
-// 			d => d.Type,
-// 			d => d.Month
-// 		),
-// 		([Type, m]) => ({
-// 			Type, data: Array.from(m, ([Month, Loans]) => ({ Month, Loans }))
-// 		})
-// 	);
-// }
 
 function endOfMonth(monthString) {
     return DateTime.fromISO(monthString).plus({ months: 1, days: - 1 }).toJSDate()
@@ -61,11 +55,24 @@ function dataDates(d) {
 
 const minMax = arr => [min(arr), max(arr)]
 
+function getHeight(d) {
+    const months = d.map(o => o.Month)
+    if (d.length % 2 === 0) {
+        return d[months.length / 2].Loans
+    } else {
+        const idx = Math.floor(months.length / 2)
+        return (d[idx].Loans + d[idx + 1].Loans) / 2
+    }
+}
+
 function LoansByItemType({ data, title }) {
     const id = 'svg-' + makeId(title)
     const [chartData, setChartData] = useState(dataDates(groupData(data)))
     const [width, setWidth] = useState(0)
     const [height, setHeight] = useState(450)
+    const [lineTipY, setLineTipY] = useState(height / 2)
+    const [lineTipVisible, setLineTipVisible] = useState(false)
+    const [lineTipText, setLineTipText] = useState("")
     const margin = { top: 30, right: 50, bottom: 60, left: 70 };
     const classes = useStyles()
     useEffect(() => {
@@ -85,41 +92,42 @@ function LoansByItemType({ data, title }) {
         .x(d => x(d.Month))
         .y(d => y(d.Loans))
     const c = d3.scaleOrdinal().domain(chartData.map(o => o.Type)).range(d3.schemeTableau10)
-    // const MyComponent = React.forwardRef(function MyComponent(props, ref) {
-    //     //  Spread the props to the underlying DOM element.
-    //     return <div {...props} ref={ref}>Bin</div>
-    //   });
-    const Path = forwardRef((props, ref) => <path {...props} ref={ref}></path>)
 
-    //   // ...
-
-    //   <Tooltip title="Delete">
-    //     <MyComponent>
-    //   </Tooltip>
-    const lineData = useRef(null)
     return (
-        <svg className={classes.root} id={id} width={width + margin.left + margin.right} height={height + margin.top + margin.bottom}>
-            <g style={{
-                transform: `translate(${margin.left}px, ${margin.top}px)`
-            }}>
-                {/* lines */}
-                {Children.toArray(
-                    chartData.map(r =>
-                        (<>
-                            <Tooltip placement='top' title='Click to select data'>
-                                <Path
-                                    ref={lineData}
+        <>
+            <svg className={classes.root} id={id} width={width + margin.left + margin.right} height={height + margin.top + margin.bottom}>
+                <g style={{
+                    transform: `translate(${margin.left}px, ${margin.top}px)`
+                }}>
+                    {/* lines */}
+                    {Children.toArray(
+                        chartData.map(r =>
+                            (<>
+                                <path
+                                    className={classes.line}
                                     stroke={c(r.Type)}
-                                    strokeWidth={1.5}
-                                    fill='none'
                                     d={line(r.data)}
+                                    onMouseEnter={() => {
+                                        setLineTipY(`${y(getHeight(r.data))}px`)
+                                        setLineTipVisible(true)
+                                        setLineTipText(r.Type)
+                                    }}
+                                    onMouseLeave={() => {
+                                        setLineTipVisible(false)
+                                    }}
                                 />
-                            </Tooltip>
-                        </>)
-                    )
-                )}
-            </g>
-        </svg>
+                            </>)
+                        )
+                    )}
+                </g>
+            </svg>
+            <ChartTip x={"50%"} y={lineTipY} visible={lineTipVisible}>
+                <Typography variant='caption'>
+                    Click to select<br/>
+                    {lineTipText}
+                </Typography>
+            </ChartTip>
+        </>
     )
 }
 
