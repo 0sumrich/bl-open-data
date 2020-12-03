@@ -40,11 +40,11 @@ function App() {
           {
             Children.toArray(
               charts.map(({ title, component }, i) => (
-                <ChartWrapper key={`chart${i}`}>
-                  <section id={makeId(title)}>
+                <section id={makeId(title)}>
+                  <ChartWrapper>
                     {data.length > 0 ? component({ title }) : null}
-                  </section>
-                </ChartWrapper>
+                  </ChartWrapper>
+                </section>
               )
               )
             )

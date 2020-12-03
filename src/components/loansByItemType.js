@@ -1,5 +1,5 @@
 // import Svg from './svg'
-import { useEffect, useState, Children, forwardRef, useRef } from 'react'
+import { useEffect, useState, Children } from 'react'
 import { groupData } from '../functions/loansByTypeDraw'
 import { makeStyles } from '@material-ui/core/styles';
 import { Typography } from '@material-ui/core';
@@ -33,9 +33,12 @@ const useStyles = makeStyles(theme => ({
         fill: 'none',
         cursor: 'pointer',
         '&:hover': {
-            strokeWidth: 2.5
+            strokeWidth: 3
         }
     },
+    circle: {
+        cursor: 'pointer'
+    }
 }));
 
 function endOfMonth(monthString) {
@@ -73,6 +76,9 @@ function LoansByItemType({ data, title }) {
     const [lineTipY, setLineTipY] = useState(height / 2)
     const [lineTipVisible, setLineTipVisible] = useState(false)
     const [lineTipText, setLineTipText] = useState("")
+    const [circleTipPos, setCircleTipPos] = useState([width / 2, height / 2])
+    const [circleTipVisible, setCircleTipVisible] = useState(false)
+    const [circleTipText, setCircleTipText] = useState({ type: '', month: '', loans: '' })
     const margin = { top: 30, right: 50, bottom: 60, left: 70 };
     const classes = useStyles()
     useEffect(() => {
@@ -93,13 +99,14 @@ function LoansByItemType({ data, title }) {
         .y(d => y(d.Loans))
     const c = d3.scaleOrdinal().domain(chartData.map(o => o.Type)).range(d3.schemeTableau10)
 
+
+
     return (
         <>
             <svg className={classes.root} id={id} width={width + margin.left + margin.right} height={height + margin.top + margin.bottom}>
                 <g style={{
                     transform: `translate(${margin.left}px, ${margin.top}px)`
                 }}>
-                    {/* lines */}
                     {Children.toArray(
                         chartData.map(r =>
                             (<>
@@ -116,6 +123,33 @@ function LoansByItemType({ data, title }) {
                                         setLineTipVisible(false)
                                     }}
                                 />
+                                <g>
+                                    {Children.toArray(
+                                        r.data.map(d => (
+                                            <circle
+                                                className={classes.circle}
+                                                r={1.5}
+                                                cx={x(d.Month)}
+                                                cy={y(d.Loans)}
+                                                fill={c(r.Type)}
+                                                onMouseEnter={e => {
+                                                    e.currentTarget.setAttribute('r', 3)
+                                                    setCircleTipPos([x(d.Month), y(d.Loans)])
+                                                    setCircleTipVisible(true)
+                                                    setCircleTipText({
+                                                        type: r.Type,
+                                                        month: d.Month,
+                                                        loans: d.Loans
+                                                    })
+                                                }}
+                                                onMouseLeave={e => {
+                                                    e.currentTarget.setAttribute('r', 1.5)
+                                                    setCircleTipVisible(false)
+                                                }}
+                                            />
+                                        )
+                                        ))}
+                                </g>
                             </>)
                         )
                     )}
@@ -123,8 +157,15 @@ function LoansByItemType({ data, title }) {
             </svg>
             <ChartTip x={"50%"} y={lineTipY} visible={lineTipVisible}>
                 <Typography variant='caption'>
-                    Click to select<br/>
+                    Click to select<br />
                     {lineTipText}
+                </Typography>
+            </ChartTip>
+            <ChartTip x={`${margin.left + margin.right + circleTipPos[0]}px`} y={`${circleTipPos[1]}px`} visible={circleTipVisible}>
+                <Typography variant='caption'>
+                    {`Item type: ${circleTipText.type}`}<br />
+                    {`Month: ${circleTipText.month.toString()}`}<br />
+                    {`Loans: ${circleTipText.loans.toString()}`}
                 </Typography>
             </ChartTip>
         </>
