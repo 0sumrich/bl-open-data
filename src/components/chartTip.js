@@ -3,10 +3,16 @@ import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles(theme => {
     return {
         tooltip: {
+            display: 'inline',
+            marginLeft: props => theme.spacing(3) + props.margin.left,
+            marginTop: props => theme.spacing(3) + props.margin.top,
             position: 'absolute',
-            left: props => props.x,
-            top: props => props.y,
+            left: props => props.left ? props.left : 'auto',
+            top: props => props.top,
             transform: "translate(-50%, -50%)",
+            // transform: ({ x, y }) => {
+            //     return `translate(${x}, ${y})`
+            // },
             visibility: props => props.visible ? 'visible' : 'hidden',
             background: theme.palette.grey[900],
             opacity: 0.5,
@@ -17,8 +23,8 @@ const useStyles = makeStyles(theme => {
     }
 })
 
-function ChartTip({ x, y, visible, children }) {
-    const classes = useStyles({ x, y, visible })
+function ChartTip({ x, y, top, left, margin, visible, children }) {
+    const classes = useStyles({ x, y, top, left, margin, visible })
     return <div className={classes.tooltip}>{children}</div>
 }
 

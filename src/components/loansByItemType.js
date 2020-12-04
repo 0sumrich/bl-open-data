@@ -5,7 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Typography } from '@material-ui/core';
 // import Tooltip from '@material-ui/core/Tooltip';
 import ChartTip from './chartTip'
-import { makeId } from '../functions/helper';
+import { makeId, minMax, endOfMonth } from '../functions/helper';
 import { select, selectAll } from 'd3-selection'
 import { scaleLinear, scaleTime, scaleOrdinal } from 'd3-scale'
 import { min, max } from 'd3-array'
@@ -41,9 +41,7 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-function endOfMonth(monthString) {
-    return DateTime.fromISO(monthString).plus({ months: 1, days: - 1 }).toJSDate()
-}
+
 
 function dataDates(d) {
     d.forEach(row => {
@@ -56,7 +54,7 @@ function dataDates(d) {
     return d
 }
 
-const minMax = arr => [min(arr), max(arr)]
+
 
 function getHeight(d) {
     const months = d.map(o => o.Month)
@@ -85,7 +83,7 @@ function LoansByItemType({ data, title }) {
         const svg = d3.select(`#${id}`)
         setWidth(parseInt(svg.style('width')) - margin.left - margin.right)
         setHeight(parseInt(svg.style('height')) - margin.top - margin.bottom)
-    })
+    }, [margin, id])
     const months = chartData.map(o => o.data.map(x => x.Month))[0]
     const loans = chartData.map(o => o.data.map(x => x.Loans)).flat()
     const x = d3.scaleTime()
@@ -99,14 +97,13 @@ function LoansByItemType({ data, title }) {
         .y(d => y(d.Loans))
     const c = d3.scaleOrdinal().domain(chartData.map(o => o.Type)).range(d3.schemeTableau10)
 
-
-
     return (
         <>
             <svg className={classes.root} id={id} width={width + margin.left + margin.right} height={height + margin.top + margin.bottom}>
                 <g style={{
                     transform: `translate(${margin.left}px, ${margin.top}px)`
                 }}>
+                    <circle r={4} cx={width / 2} cy={height / 2} fill="black" />
                     {Children.toArray(
                         chartData.map(r =>
                             (<>
@@ -115,7 +112,7 @@ function LoansByItemType({ data, title }) {
                                     stroke={c(r.Type)}
                                     d={line(r.data)}
                                     onMouseEnter={() => {
-                                        setLineTipY(`${y(getHeight(r.data))}px`)
+                                        setLineTipY(y(getHeight(r.data)))
                                         setLineTipVisible(true)
                                         setLineTipText(r.Type)
                                     }}
@@ -155,19 +152,18 @@ function LoansByItemType({ data, title }) {
                     )}
                 </g>
             </svg>
-            <ChartTip x={"50%"} y={lineTipY} visible={lineTipVisible}>
+            <ChartTip margin={margin} x={"-50%"} y={"-50%"} top={lineTipY - 25} left={width / 2} visible={lineTipVisible}>
                 <Typography variant='caption'>
-                    Click to select<br />
                     {lineTipText}
                 </Typography>
             </ChartTip>
-            <ChartTip x={`${margin.left + margin.right + circleTipPos[0]}px`} y={`${circleTipPos[1]}px`} visible={circleTipVisible}>
+            {/* <ChartTip x={`${margin.left + margin.right + circleTipPos[0]}px`} y={`${circleTipPos[1]}px`} visible={circleTipVisible}>
                 <Typography variant='caption'>
                     {`Item type: ${circleTipText.type}`}<br />
                     {`Month: ${circleTipText.month.toString()}`}<br />
                     {`Loans: ${circleTipText.loans.toString()}`}
                 </Typography>
-            </ChartTip>
+            </ChartTip> */}
         </>
     )
 }
