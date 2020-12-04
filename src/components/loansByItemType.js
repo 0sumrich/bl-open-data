@@ -11,6 +11,7 @@ import { scaleLinear, scaleTime, scaleOrdinal } from 'd3-scale'
 import { min, max } from 'd3-array'
 import { line } from 'd3-shape'
 import { schemeTableau10 } from 'd3-scale-chromatic'
+import {axisLeft, axisBottom} from 'd3-axis'
 import { DateTime } from 'luxon'
 const d3 = {
     select,
@@ -20,7 +21,9 @@ const d3 = {
     min,
     max,
     line,
-    schemeTableau10
+    schemeTableau10,
+    axisLeft,
+    axisBottom
 }
 
 const useStyles = makeStyles(theme => ({
@@ -41,6 +44,47 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
+// scale example
+
+// export default function App() {
+//     const xScale = scaleLinear()
+//       .domain([0, 1])
+//       .range([10, 300]);
+//     const yScale = scaleLinear()
+//       .domain([0, 1])
+//       .range([10, 150]);
+//     const [xStart, xEnd] = xScale.range();
+//     const [yStart, yEnd] = yScale.range();
+//     const ticks = xScale.ticks();
+  
+//     return (
+//       <div className="App">
+//         <svg width={1000} height={1000}>
+//           <line x1={xStart} x2={xEnd} y1={yEnd} y2={yEnd} stroke="red" />
+//           <line x1={xStart} x2={xStart} y1={yEnd} y2={yStart} stroke="red" />
+//           <g className="ticks">
+//             {ticks.map((t, i) => {
+//               const x = xScale(t);
+//               return (
+//                 <React.Fragment key={i}>
+//                   <line x1={x} x2={x} y1={yEnd} y2={yEnd + 5} stroke="red" />
+//                   <text
+//                     x={x}
+//                     y={yEnd + 20}
+//                     fill="red"
+//                     textAnchor="middle"
+//                     fontSize={10}
+//                   >
+//                     {t}
+//                   </text>
+//                 </React.Fragment>
+//               );
+//             })}
+//           </g>
+//         </svg>
+//       </div>
+//     );
+//   }
 
 
 function dataDates(d) {
@@ -86,6 +130,7 @@ function LoansByItemType({ data, title }) {
     }, [margin, id])
     const months = chartData.map(o => o.data.map(x => x.Month))[0]
     const loans = chartData.map(o => o.data.map(x => x.Loans)).flat()
+    const itemTypes = chartData.map(o => o.Type)
     const x = d3.scaleTime()
         .domain(minMax(months))
         .range([0, width])
@@ -95,15 +140,19 @@ function LoansByItemType({ data, title }) {
     const line = d3.line()
         .x(d => x(d.Month))
         .y(d => y(d.Loans))
+    // color scale
     const c = d3.scaleOrdinal().domain(chartData.map(o => o.Type)).range(d3.schemeTableau10)
-
+    // const xAxis = d3.axisBottom(x);
+    // const yAxis = d3.axisLeft(y);
+    const [xStart, xEnd] = x.range();
+    const [yStart, yEnd] = y.range();
+    const ticks = x.ticks();
     return (
         <>
             <svg className={classes.root} id={id} width={width + margin.left + margin.right} height={height + margin.top + margin.bottom}>
                 <g style={{
                     transform: `translate(${margin.left}px, ${margin.top}px)`
                 }}>
-                    <circle r={4} cx={width / 2} cy={height / 2} fill="black" />
                     {Children.toArray(
                         chartData.map(r =>
                             (<>
@@ -147,6 +196,17 @@ function LoansByItemType({ data, title }) {
                                         )
                                         ))}
                                 </g>
+                                <g>
+                                    {Children.toArray(ticks.map((t,i) =>{
+                                        const xPos = x(t)
+                                        return (
+                                            <>
+                                                <line x1={xPos} x2={xPos} y1={yEnd} y2={yEnd + 5} stroke="black" />
+                                                <text>{DateTime.fromJSDate(t).toFormat('MMM y')}</text>
+                                            </>
+                                        )
+                                    }))}
+                                </g>
                             </>)
                         )
                     )}
@@ -157,13 +217,13 @@ function LoansByItemType({ data, title }) {
                     {lineTipText}
                 </Typography>
             </ChartTip>
-            {/* <ChartTip x={`${margin.left + margin.right + circleTipPos[0]}px`} y={`${circleTipPos[1]}px`} visible={circleTipVisible}>
+            <ChartTip margin={margin} x={"-50%"} y={"-50%"} left={circleTipPos[0]} top={circleTipPos[1] - 45} visible={circleTipVisible}>
                 <Typography variant='caption'>
-                    {`Item type: ${circleTipText.type}`}<br />
-                    {`Month: ${circleTipText.month.toString()}`}<br />
-                    {`Loans: ${circleTipText.loans.toString()}`}
+                    {`${circleTipText.type}`}<br />
+                    {`${DateTime.fromJSDate(circleTipText.month).toFormat('MMM y')}`}<br />
+                    {`Loans: ${circleTipText.loans}`}
                 </Typography>
-            </ChartTip> */}
+            </ChartTip>
         </>
     )
 }
