@@ -11,7 +11,7 @@ import { scaleLinear, scaleTime, scaleOrdinal } from 'd3-scale'
 import { min, max } from 'd3-array'
 import { line } from 'd3-shape'
 import { schemeTableau10 } from 'd3-scale-chromatic'
-import {axisLeft, axisBottom} from 'd3-axis'
+import { axisLeft, axisBottom } from 'd3-axis'
 import { DateTime } from 'luxon'
 const d3 = {
     select,
@@ -41,50 +41,23 @@ const useStyles = makeStyles(theme => ({
     },
     circle: {
         cursor: 'pointer'
+    },
+    xAxis: {
+        fill: 'none',
+        fontSize: 10,
+        fontFamily: 'inherit',
+        textAnchor: 'midde'
+    },
+    tickText: {
+        fontSize: '0.5rem',
+        stroke: 'none',
+        fill: 'black',
+        textAnchor: 'middle',
+        fontWeight: 'lighter'
+    },
+    ticks: {
     }
 }));
-
-// scale example
-
-// export default function App() {
-//     const xScale = scaleLinear()
-//       .domain([0, 1])
-//       .range([10, 300]);
-//     const yScale = scaleLinear()
-//       .domain([0, 1])
-//       .range([10, 150]);
-//     const [xStart, xEnd] = xScale.range();
-//     const [yStart, yEnd] = yScale.range();
-//     const ticks = xScale.ticks();
-  
-//     return (
-//       <div className="App">
-//         <svg width={1000} height={1000}>
-//           <line x1={xStart} x2={xEnd} y1={yEnd} y2={yEnd} stroke="red" />
-//           <line x1={xStart} x2={xStart} y1={yEnd} y2={yStart} stroke="red" />
-//           <g className="ticks">
-//             {ticks.map((t, i) => {
-//               const x = xScale(t);
-//               return (
-//                 <React.Fragment key={i}>
-//                   <line x1={x} x2={x} y1={yEnd} y2={yEnd + 5} stroke="red" />
-//                   <text
-//                     x={x}
-//                     y={yEnd + 20}
-//                     fill="red"
-//                     textAnchor="middle"
-//                     fontSize={10}
-//                   >
-//                     {t}
-//                   </text>
-//                 </React.Fragment>
-//               );
-//             })}
-//           </g>
-//         </svg>
-//       </div>
-//     );
-//   }
 
 
 function dataDates(d) {
@@ -110,6 +83,28 @@ function getHeight(d) {
     }
 }
 
+function XAxis(scale, tickFunction, height, width) {
+    const classes = useStyles()
+    const ticks = scale.scale.ticks()
+    // const [xStart, xEnd] = scale.scale.range()
+    return (
+        <g className={classes.xAxis} transform={`translate(0, ${height})`}>
+            {Children.toArray(ticks.map(t => {
+                const x = scale.scale(t)
+                return (
+                    <>
+                        <g className={classes.tick} transform={`translate(${x}, 0)`}>
+                            <line y2="6" stroke='currentColor' />
+                            <text fill="currentColor" y="9" dy="0.71em">{tickFunction(t)}</text>
+                        </g>
+                    </>
+                )
+            }))
+            }
+        </g>
+    )
+}
+
 function LoansByItemType({ data, title }) {
     const id = 'svg-' + makeId(title)
     const [chartData, setChartData] = useState(dataDates(groupData(data)))
@@ -123,6 +118,9 @@ function LoansByItemType({ data, title }) {
     const [circleTipText, setCircleTipText] = useState({ type: '', month: '', loans: '' })
     const margin = { top: 30, right: 50, bottom: 60, left: 70 };
     const classes = useStyles()
+    function tickFunction(t) {
+        return DateTime.fromJSDate(t).toFormat('MMM, yy')
+    }
     useEffect(() => {
         const svg = d3.select(`#${id}`)
         setWidth(parseInt(svg.style('width')) - margin.left - margin.right)
@@ -144,80 +142,73 @@ function LoansByItemType({ data, title }) {
     const c = d3.scaleOrdinal().domain(chartData.map(o => o.Type)).range(d3.schemeTableau10)
     // const xAxis = d3.axisBottom(x);
     // const yAxis = d3.axisLeft(y);
-    const [xStart, xEnd] = x.range();
-    const [yStart, yEnd] = y.range();
-    const ticks = x.ticks();
+    // const ticks = x.ticks();
+    // const xTextArr = months.map(x => DateTime.fromJSDate(x).toFormat('MMM yy'))
+
     return (
         <>
             <svg className={classes.root} id={id} width={width + margin.left + margin.right} height={height + margin.top + margin.bottom}>
                 <g style={{
                     transform: `translate(${margin.left}px, ${margin.top}px)`
                 }}>
-                    {Children.toArray(
-                        chartData.map(r =>
-                            (<>
-                                <path
-                                    className={classes.line}
-                                    stroke={c(r.Type)}
-                                    d={line(r.data)}
-                                    onMouseEnter={() => {
-                                        setLineTipY(y(getHeight(r.data)))
-                                        setLineTipVisible(true)
-                                        setLineTipText(r.Type)
-                                    }}
-                                    onMouseLeave={() => {
-                                        setLineTipVisible(false)
-                                    }}
-                                />
-                                <g>
-                                    {Children.toArray(
-                                        r.data.map(d => (
-                                            <circle
-                                                className={classes.circle}
-                                                r={1.5}
-                                                cx={x(d.Month)}
-                                                cy={y(d.Loans)}
-                                                fill={c(r.Type)}
-                                                onMouseEnter={e => {
-                                                    e.currentTarget.setAttribute('r', 3)
-                                                    setCircleTipPos([x(d.Month), y(d.Loans)])
-                                                    setCircleTipVisible(true)
-                                                    setCircleTipText({
-                                                        type: r.Type,
-                                                        month: d.Month,
-                                                        loans: d.Loans
-                                                    })
-                                                }}
-                                                onMouseLeave={e => {
-                                                    e.currentTarget.setAttribute('r', 1.5)
-                                                    setCircleTipVisible(false)
-                                                }}
-                                            />
-                                        )
-                                        ))}
-                                </g>
-                                <g>
-                                    {Children.toArray(ticks.map((t,i) =>{
-                                        const xPos = x(t)
-                                        return (
-                                            <>
-                                                <line x1={xPos} x2={xPos} y1={yEnd} y2={yEnd + 5} stroke="black" />
-                                                <text>{DateTime.fromJSDate(t).toFormat('MMM y')}</text>
-                                            </>
-                                        )
-                                    }))}
-                                </g>
-                            </>)
-                        )
-                    )}
+                    <g>
+                        {Children.toArray(
+                            chartData.map(r =>
+                                (<>
+                                    <path
+                                        className={classes.line}
+                                        stroke={c(r.Type)}
+                                        d={line(r.data)}
+                                        onMouseEnter={() => {
+                                            setLineTipY(y(getHeight(r.data)))
+                                            setLineTipVisible(true)
+                                            setLineTipText(r.Type)
+                                        }}
+                                        onMouseLeave={() => {
+                                            setLineTipVisible(false)
+                                        }}
+                                    />
+                                    <g>
+                                        {Children.toArray(
+                                            r.data.map(d => (
+                                                <circle
+                                                    className={classes.circle}
+                                                    r={1.5}
+                                                    cx={x(d.Month)}
+                                                    cy={y(d.Loans)}
+                                                    fill={c(r.Type)}
+                                                    onMouseEnter={e => {
+                                                        e.currentTarget.setAttribute('r', 3)
+                                                        setCircleTipPos([x(d.Month), y(d.Loans)])
+                                                        setCircleTipVisible(true)
+                                                        setCircleTipText({
+                                                            type: r.Type,
+                                                            month: d.Month,
+                                                            loans: d.Loans
+                                                        })
+                                                    }}
+                                                    onMouseLeave={e => {
+                                                        e.currentTarget.setAttribute('r', 1.5)
+                                                        setCircleTipVisible(false)
+                                                    }}
+                                                />
+                                            )
+                                            ))}
+                                    </g>
+                                </>)
+                            )
+                        )}
+                    </g>
+                    {/* {axes} */}
+                    <XAxis scale={x} tickFunction={tickFunction} height={height} />
                 </g>
             </svg>
-            <ChartTip margin={margin} x={"-50%"} y={"-50%"} top={lineTipY - 25} left={width / 2} visible={lineTipVisible}>
+            <ChartTip margin={margin} top={lineTipY - 25} left={width / 2} visible={lineTipVisible}>
                 <Typography variant='caption'>
                     {lineTipText}
                 </Typography>
             </ChartTip>
-            <ChartTip margin={margin} x={"-50%"} y={"-50%"} left={circleTipPos[0]} top={circleTipPos[1] - 45} visible={circleTipVisible}>
+            <ChartTip margin={margin} left={circleTipPos[0]} top={circleTipPos[1] - 45} visible={circleTipVisible}>
                 <Typography variant='caption'>
                     {`${circleTipText.type}`}<br />
                     {`${DateTime.fromJSDate(circleTipText.month).toFormat('MMM y')}`}<br />
