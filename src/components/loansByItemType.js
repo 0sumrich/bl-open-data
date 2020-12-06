@@ -6,13 +6,16 @@ import { Typography } from '@material-ui/core';
 // import Tooltip from '@material-ui/core/Tooltip';
 import ChartTip from './chartTip'
 import { makeId, minMax, endOfMonth } from '../functions/helper';
-import { select, selectAll } from 'd3-selection'
+import { select } from 'd3-selection'
 import { scaleLinear, scaleTime, scaleOrdinal } from 'd3-scale'
 import { min, max } from 'd3-array'
 import { line } from 'd3-shape'
 import { schemeTableau10 } from 'd3-scale-chromatic'
 import { axisLeft, axisBottom } from 'd3-axis'
 import { DateTime } from 'luxon'
+import XAxis from './xAxis'
+import YAxis from './yAxis'
+
 const d3 = {
     select,
     scaleLinear,
@@ -41,20 +44,6 @@ const useStyles = makeStyles(theme => ({
     },
     circle: {
         cursor: 'pointer'
-    },
-    xAxis: {
-        fill: 'none',
-        fontSize: 10,
-        fontFamily: 'inherit',
-        textAnchor: 'midde'
-    },
-    tickText: {
-        fontSize: '0.6rem',
-        stroke: 'none',
-        fill: 'currentColor',
-        textAnchor: 'middle'
-    },
-    ticks: {
     }
 }));
 
@@ -70,8 +59,6 @@ function dataDates(d) {
     return d
 }
 
-
-
 function getHeight(d) {
     const months = d.map(o => o.Month)
     if (d.length % 2 === 0) {
@@ -81,17 +68,6 @@ function getHeight(d) {
         return (d[idx].Loans + d[idx + 1].Loans) / 2
     }
 }
-
-// function XAxis(scale, tickFunction, height, width) {
-//     const classes = useStyles()
-//     const ticks = scale.scale.ticks()
-//     console.log(height)
-//     console.log(typeof (tickFunction))
-//     // const [xStart, xEnd] = scale.scale.range()
-//     return (
-
-//     )
-// }
 
 function LoansByItemType({ data, title }) {
     const id = 'svg-' + makeId(title)
@@ -104,19 +80,17 @@ function LoansByItemType({ data, title }) {
     const [circleTipPos, setCircleTipPos] = useState([width / 2, height / 2])
     const [circleTipVisible, setCircleTipVisible] = useState(false)
     const [circleTipText, setCircleTipText] = useState({ type: '', month: '', loans: '' })
-    const margin = { top: 30, right: 50, bottom: 60, left: 70 };
+    const [selected, setSelected] = useState([])
+    const margin = { top: 30, right: 50, bottom: 30, left: 50 };
     const classes = useStyles()
-    // function tickFunction(t) {
-    //     return 
-    // }
+
     useEffect(() => {
         const svg = d3.select(`#${id}`)
         setWidth(parseInt(svg.style('width')) - margin.left - margin.right)
         setHeight(parseInt(svg.style('height')) - margin.top - margin.bottom)
-    }, [])
+    })
     const months = chartData.map(o => o.data.map(x => x.Month))[0]
     const loans = chartData.map(o => o.data.map(x => x.Loans)).flat()
-    const itemTypes = chartData.map(o => o.Type)
     const x = d3.scaleTime()
         .domain(minMax(months))
         .range([0, width])
@@ -128,31 +102,7 @@ function LoansByItemType({ data, title }) {
         .y(d => y(d.Loans))
     // color scale
     const c = d3.scaleOrdinal().domain(chartData.map(o => o.Type)).range(d3.schemeTableau10)
-    // const ticks = x.ticks()
-    // console.log(ticks[0])
-    // console.log(x(ticks[0]))
-    // const xAxis = d3.axisBottom(x);
-    // const yAxis = d3.axisLeft(y);
-    // const ticks = x.ticks();
-    // const xTextArr = months.map(x => DateTime.fromJSDate(x).toFormat('MMM yy'))
-    const XAxis = () => (
-        <g className={classes.xAxis} transform={`translate(0, ${height})`}>
-            <line x1={0} x2={width} stroke='black'/>
-            {Children.toArray(months.map((t, i) => {
-                return (
-                    <>
-                        <g className={classes.tick} transform={`translate(${x(t)}, 0)`}>
-                            <line y2="6" stroke='currentColor' />
-                            <text className={classes.tickText} y="9" dy="0.71em">{DateTime.fromJSDate(t).toFormat('MMM yy')}</text>
-                        </g>
-                    </>
-                )
-            }
-            ))
-            }
-        </g>
-    )
-
+    console.log(selected)
     return (
         <>
             <svg className={classes.root} id={id} width={width + margin.left + margin.right} height={height + margin.top + margin.bottom}>
@@ -175,6 +125,17 @@ function LoansByItemType({ data, title }) {
                                         onMouseLeave={() => {
                                             setLineTipVisible(false)
                                         }}
+                                        onClick={() => {
+                                            // let arr = selected
+                                            if (!selected.includes(r.Type)) {
+                                                setSelected([...selected, r.Type])
+                                            } else {
+                                                setSelected(selected.filter(x => x !== r.Type))
+                                            }
+                                            
+                                        }}
+                                        strokeOpacity={selected.includes(r.Type)||selected.length<1 ? 1 : 0.2}
+                                        strokeWidth={selected.includes(r.Type) ? 3 : 1.5}
                                     />
                                     <g>
                                         {Children.toArray(
@@ -207,7 +168,8 @@ function LoansByItemType({ data, title }) {
                             )
                         )}
                     </g>
-                    <XAxis />
+                    <XAxis height={height} width={width} tickArray={months} tickFunction={t => DateTime.fromJSDate(t).toFormat('MMM yy')} scale={x} />
+                    <YAxis height={height} width={width} tickArray={y.ticks()} scale={y} />
                 </g>
             </svg>
             <ChartTip margin={margin} top={lineTipY - 25} left={width / 2} visible={lineTipVisible}>
