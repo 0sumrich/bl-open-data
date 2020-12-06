@@ -1,5 +1,6 @@
 // import Svg from './svg'
 import { useEffect, useState, Children } from 'react'
+import classNames from 'classnames';
 import { groupData } from '../functions/loansByTypeDraw'
 import { makeStyles } from '@material-ui/core/styles';
 import { Typography } from '@material-ui/core';
@@ -41,6 +42,9 @@ const useStyles = makeStyles(theme => ({
         '&:hover': {
             strokeWidth: 3
         }
+    },
+    selected: {
+        strokeWidth: 3
     },
     circle: {
         cursor: 'pointer'
@@ -114,7 +118,7 @@ function LoansByItemType({ data, title }) {
                             chartData.map(r =>
                                 (<>
                                     <path
-                                        className={classes.line}
+                                        className={classNames(classes.line, { [classes.selected]: selected.includes(r.Type) })}
                                         stroke={c(r.Type)}
                                         d={line(r.data)}
                                         onMouseEnter={() => {
@@ -132,10 +136,9 @@ function LoansByItemType({ data, title }) {
                                             } else {
                                                 setSelected(selected.filter(x => x !== r.Type))
                                             }
-                                            
+
                                         }}
-                                        strokeOpacity={selected.includes(r.Type)||selected.length<1 ? 1 : 0.2}
-                                        strokeWidth={selected.includes(r.Type) ? 3 : 1.5}
+                                        strokeOpacity={selected.includes(r.Type) || selected.length < 1 ? 1 : 0.2}
                                     />
                                     <g>
                                         {Children.toArray(
