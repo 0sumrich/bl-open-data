@@ -6,6 +6,7 @@ import CardContent from '@material-ui/core/CardContent';
 const useStyles = makeStyles(theme => ({
     root: {
         margin: `${theme.spacing(2)}px auto`,
+        overflow: 'visible'
     },
     cardHelper: {
         padding: theme.spacing(3),

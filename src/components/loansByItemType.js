@@ -49,11 +49,10 @@ const useStyles = makeStyles(theme => ({
         textAnchor: 'midde'
     },
     tickText: {
-        fontSize: '0.5rem',
+        fontSize: '0.6rem',
         stroke: 'none',
-        fill: 'black',
-        textAnchor: 'middle',
-        fontWeight: 'lighter'
+        fill: 'currentColor',
+        textAnchor: 'middle'
     },
     ticks: {
     }
@@ -83,27 +82,16 @@ function getHeight(d) {
     }
 }
 
-function XAxis(scale, tickFunction, height, width) {
-    const classes = useStyles()
-    const ticks = scale.scale.ticks()
-    // const [xStart, xEnd] = scale.scale.range()
-    return (
-        <g className={classes.xAxis} transform={`translate(0, ${height})`}>
-            {Children.toArray(ticks.map(t => {
-                const x = scale.scale(t)
-                return (
-                    <>
-                        <g className={classes.tick} transform={`translate(${x}, 0)`}>
-                            <line y2="6" stroke='currentColor' />
-                            <text fill="currentColor" y="9" dy="0.71em">{tickFunction(t)}</text>
-                        </g>
-                    </>
-                )
-            }))
-            }
-        </g>
-    )
-}
+// function XAxis(scale, tickFunction, height, width) {
+//     const classes = useStyles()
+//     const ticks = scale.scale.ticks()
+//     console.log(height)
+//     console.log(typeof (tickFunction))
+//     // const [xStart, xEnd] = scale.scale.range()
+//     return (
+
+//     )
+// }
 
 function LoansByItemType({ data, title }) {
     const id = 'svg-' + makeId(title)
@@ -118,14 +106,14 @@ function LoansByItemType({ data, title }) {
     const [circleTipText, setCircleTipText] = useState({ type: '', month: '', loans: '' })
     const margin = { top: 30, right: 50, bottom: 60, left: 70 };
     const classes = useStyles()
-    function tickFunction(t) {
-        return DateTime.fromJSDate(t).toFormat('MMM, yy')
-    }
+    // function tickFunction(t) {
+    //     return 
+    // }
     useEffect(() => {
         const svg = d3.select(`#${id}`)
         setWidth(parseInt(svg.style('width')) - margin.left - margin.right)
         setHeight(parseInt(svg.style('height')) - margin.top - margin.bottom)
-    }, [margin, id])
+    }, [])
     const months = chartData.map(o => o.data.map(x => x.Month))[0]
     const loans = chartData.map(o => o.data.map(x => x.Loans)).flat()
     const itemTypes = chartData.map(o => o.Type)
@@ -140,10 +128,30 @@ function LoansByItemType({ data, title }) {
         .y(d => y(d.Loans))
     // color scale
     const c = d3.scaleOrdinal().domain(chartData.map(o => o.Type)).range(d3.schemeTableau10)
+    // const ticks = x.ticks()
+    // console.log(ticks[0])
+    // console.log(x(ticks[0]))
     // const xAxis = d3.axisBottom(x);
     // const yAxis = d3.axisLeft(y);
     // const ticks = x.ticks();
     // const xTextArr = months.map(x => DateTime.fromJSDate(x).toFormat('MMM yy'))
+    const XAxis = () => (
+        <g className={classes.xAxis} transform={`translate(0, ${height})`}>
+            <line x1={0} x2={width} stroke='black'/>
+            {Children.toArray(months.map((t, i) => {
+                return (
+                    <>
+                        <g className={classes.tick} transform={`translate(${x(t)}, 0)`}>
+                            <line y2="6" stroke='currentColor' />
+                            <text className={classes.tickText} y="9" dy="0.71em">{DateTime.fromJSDate(t).toFormat('MMM yy')}</text>
+                        </g>
+                    </>
+                )
+            }
+            ))
+            }
+        </g>
+    )
 
     return (
         <>
@@ -199,8 +207,7 @@ function LoansByItemType({ data, title }) {
                             )
                         )}
                     </g>
-                    {/* {axes} */}
-                    <XAxis scale={x} tickFunction={tickFunction} height={height} />
+                    <XAxis />
                 </g>
             </svg>
             <ChartTip margin={margin} top={lineTipY - 25} left={width / 2} visible={lineTipVisible}>

@@ -22,7 +22,7 @@ const useStyles = makeStyles(theme => {
 
 function ChartTip(props) {
     const classes = useStyles(props)
-    return <div className={classes.tooltip}>{children}</div>
+    return <div className={classes.tooltip}>{props.children}</div>
 }
 
 export default ChartTip
