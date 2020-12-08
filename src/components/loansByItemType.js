@@ -16,6 +16,7 @@ import { axisLeft, axisBottom } from 'd3-axis'
 import { DateTime } from 'luxon'
 import XAxis from './xAxis'
 import YAxis from './yAxis'
+import Title from './title'
 
 const d3 = {
     select,
@@ -48,6 +49,16 @@ const useStyles = makeStyles(theme => ({
     },
     circle: {
         cursor: 'pointer'
+    },
+    legend: {
+        fill: 'none',
+        fontSize: 10,
+    },
+    legendText: {
+        fontSize: '0.6rem',
+        stroke: 'none',
+        // fill: 'currentColor',
+        textAnchor: 'end',
     }
 }));
 
@@ -85,7 +96,7 @@ function LoansByItemType({ data, title }) {
     const [circleTipVisible, setCircleTipVisible] = useState(false)
     const [circleTipText, setCircleTipText] = useState({ type: '', month: '', loans: '' })
     const [selected, setSelected] = useState([])
-    const margin = { top: 30, right: 50, bottom: 30, left: 50 };
+    const margin = { top: 50, right: 50, bottom: 30, left: 50 };
     const classes = useStyles()
 
     useEffect(() => {
@@ -106,10 +117,11 @@ function LoansByItemType({ data, title }) {
         .y(d => y(d.Loans))
     // color scale
     const c = d3.scaleOrdinal().domain(chartData.map(o => o.Type)).range(d3.schemeTableau10)
-    console.log(selected)
+
     return (
         <>
             <svg className={classes.root} id={id} width={width + margin.left + margin.right} height={height + margin.top + margin.bottom}>
+                <Title x={margin.left + width / 2} y={0.25 * margin.top}>{title}</Title>
                 <g style={{
                     transform: `translate(${margin.left}px, ${margin.top}px)`
                 }}>
@@ -170,6 +182,11 @@ function LoansByItemType({ data, title }) {
                                 </>)
                             )
                         )}
+                        <g className={classes.legend} transform={`translate(${width}, 0)`}>
+                            {selected.map((t, i) =>
+                                <text className={classes.legendText} y={15 * (i)} fill={c(t)}>{t}</text>
+                            )}
+                        </g>
                     </g>
                     <XAxis height={height} width={width} tickArray={months} tickFunction={t => DateTime.fromJSDate(t).toFormat('MMM yy')} scale={x} />
                     <YAxis height={height} width={width} tickArray={y.ticks()} scale={y} />
