@@ -10,18 +10,15 @@ const toApiUrl = (url) => {
     return insertAt(url, 'api/', root.length)
 }
 
-const corsUrl = 'http://cors-anywhere.herokuapp.com/'
+const corsUrl = 'https://cors-anywhere.herokuapp.com/'
 const headers = {
     Origin: process.env.PUBLIC_URL
 }
 const opts = { headers }
 const fetchCors = async url => await fetch(corsUrl + url, opts)
 
-async function getDataProd() {
-    const datasets = await getDatasets()
-    const data = []
-    for (const ds of datasets) {
-        const { url } = ds
+async function getResourceUri(url) {
+    try {
         const res = await fetchCors(toApiUrl(url))
         const d = await res.json()
         const resources = d.resources
@@ -35,10 +32,31 @@ async function getDataProd() {
         }
         const key = keys[dates.indexOf(DateTime.max(...dates))]
         const resourceUri = resources[key]['url']
-        const csv = await fetchCors(resourceUri).then(s => s.text()).then(s => csvParse(s))
-        // data.push(json)
-        ds.data = csv
-        data.push(ds)
+        return resourceUri
+    } catch (e) {
+        console.log(e)
+        return undefined
+    }
+}
+
+async function getDataProd() {
+    const datasets = await getDatasets()
+    const data = []
+    for (const ds of datasets) {
+        const { url } = ds
+        console.log(url)
+        const resourceUri = await getResourceUri(url)
+        try {
+            const csvRes = await fetchCors(resourceUri)
+            const csv = await csvRes.text().then(s => csvParse(s))
+            // data.push(json)
+            ds.data = csv
+            data.push(ds)
+        } catch (e) {
+            console.log(e)
+            data.push(undefined)
+            continue
+        }
     }
     return data
 }

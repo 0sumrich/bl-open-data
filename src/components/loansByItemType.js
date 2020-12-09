@@ -1,12 +1,10 @@
-// import Svg from './svg'
 import { useEffect, useState, Children } from 'react'
 import classNames from 'classnames';
-import { groupData } from '../functions/loansByTypeDraw'
+import { groupData, dataDates, getHeight } from '../functions/loansByTypeHelp'
 import { makeStyles } from '@material-ui/core/styles';
 import { Typography } from '@material-ui/core';
-// import Tooltip from '@material-ui/core/Tooltip';
 import ChartTip from './chartTip'
-import { makeId, minMax, endOfMonth } from '../functions/helper';
+import { makeId, minMax } from '../functions/helper';
 import { select } from 'd3-selection'
 import { scaleLinear, scaleTime, scaleOrdinal } from 'd3-scale'
 import { min, max } from 'd3-array'
@@ -57,32 +55,10 @@ const useStyles = makeStyles(theme => ({
     legendText: {
         fontSize: '0.6rem',
         stroke: 'none',
-        // fill: 'currentColor',
         textAnchor: 'end',
     }
 }));
 
-
-function dataDates(d) {
-    d.forEach(row => {
-        row.data.forEach(r => {
-            const month = r.Month
-            const jsDate = endOfMonth(month)
-            r.Month = jsDate
-        })
-    })
-    return d
-}
-
-function getHeight(d) {
-    const months = d.map(o => o.Month)
-    if (d.length % 2 === 0) {
-        return d[months.length / 2].Loans
-    } else {
-        const idx = Math.floor(months.length / 2)
-        return (d[idx].Loans + d[idx + 1].Loans) / 2
-    }
-}
 
 function LoansByItemType({ data, title }) {
     const id = 'svg-' + makeId(title)
@@ -96,7 +72,7 @@ function LoansByItemType({ data, title }) {
     const [circleTipVisible, setCircleTipVisible] = useState(false)
     const [circleTipText, setCircleTipText] = useState({ type: '', month: '', loans: '' })
     const [selected, setSelected] = useState([])
-    const margin = { top: 50, right: 50, bottom: 30, left: 50 };
+    const margin = { top: 65, right: 10, bottom: 30, left: 75 };
     const classes = useStyles()
 
     useEffect(() => {
@@ -115,12 +91,11 @@ function LoansByItemType({ data, title }) {
     const line = d3.line()
         .x(d => x(d.Month))
         .y(d => y(d.Loans))
-    // color scale
     const c = d3.scaleOrdinal().domain(chartData.map(o => o.Type)).range(d3.schemeTableau10)
 
     return (
         <>
-            <svg className={classes.root} id={id} width={width + margin.left + margin.right} height={height + margin.top + margin.bottom}>
+            <svg onDoubleClick={() => setSelected([])} className={classes.root} id={id} width={width + margin.left + margin.right} height={height + margin.top + margin.bottom}>
                 <Title x={margin.left + width / 2} y={0.25 * margin.top}>{title}</Title>
                 <g style={{
                     transform: `translate(${margin.left}px, ${margin.top}px)`
@@ -183,13 +158,14 @@ function LoansByItemType({ data, title }) {
                             )
                         )}
                         <g className={classes.legend} transform={`translate(${width}, 0)`}>
-                            {selected.map((t, i) =>
+                            {Children.toArray(selected.map((t, i) =>
                                 <text className={classes.legendText} y={15 * (i)} fill={c(t)}>{t}</text>
-                            )}
+                            ))}
                         </g>
                     </g>
                     <XAxis height={height} width={width} tickArray={months} tickFunction={t => DateTime.fromJSDate(t).toFormat('MMM yy')} scale={x} />
                     <YAxis height={height} width={width} tickArray={y.ticks()} scale={y} />
+                    <text transform="rotate(-90)" x={height/-2} y={-margin.left} dy={'1rem'} style={{textAnchor: 'middle'}}>Loans + renewals</text>
                 </g>
             </svg>
             <ChartTip margin={margin} top={lineTipY - 25} left={width / 2} visible={lineTipVisible}>
