@@ -44,12 +44,10 @@ async function getDataProd() {
     const data = []
     for (const ds of datasets) {
         const { url } = ds
-        console.log(url)
         const resourceUri = await getResourceUri(url)
         try {
             const csvRes = await fetchCors(resourceUri)
             const csv = await csvRes.text().then(s => csvParse(s))
-            // data.push(json)
             ds.data = csv
             data.push(ds)
         } catch (e) {

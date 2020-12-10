@@ -8,8 +8,8 @@ import LoansByItemType from './components/loansByItemType'
 import getData from './functions/getData'
 import { getDataByTitle, makeId } from './functions/helper'
 
-const isDev = process.env.NODE_ENV==='development'
-// const isDev = false
+// const isDev = process.env.NODE_ENV==='development'
+const isDev = false
 
 const Side = ({ children }) => <Grid item md={2} sm={false} xs={false}>{children}</Grid>
 const Main = ({ children }) => <Grid item md={10} sm={12} xs={12}>{children}</Grid>

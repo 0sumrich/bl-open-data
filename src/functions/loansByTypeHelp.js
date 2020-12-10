@@ -1,8 +1,5 @@
 import { rollup, sum } from 'd3-array';
-import { keepKeys, unpack } from './helper';
-import { select } from 'd3-selection'
-import { scaleLinear, scaleTime, scaleOrdinal } from 'd3-scale'
-import { min, max } from 'd3-array'
+import { keepKeys } from './helper';
 import { endOfMonth } from '../functions/helper';
 
 export function groupData(initData) {
