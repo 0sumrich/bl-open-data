@@ -5,10 +5,11 @@ import SideNav from './components/sideNav'
 import ContentWrapper from './components/contentWrapper'
 import ChartWrapper from './components/chartWrapper'
 import LoansByItemType from './components/loansByItemType'
+import LoansByLibrary from './components/loansByLibrary'
 import getData from './functions/getData'
 import { getDataByTitle, makeId } from './functions/helper'
 
-const isDev = process.env.NODE_ENV==='development'
+const isDev = process.env.NODE_ENV === 'development'
 // const isDev = false
 
 const Side = ({ children }) => <Grid item md={2} sm={false} xs={false}>{children}</Grid>
@@ -29,6 +30,10 @@ function App() {
     {
       title: 'Loans by item type',
       component: (props) => <LoansByItemType {...props} data={getDataByTitle(data, 'Library loans')} />
+    },
+    {
+      title: 'Loans by library',
+      component: (props) => <LoansByLibrary {...props} data={getDataByTitle(data, 'Library loans')} />
     }
   ]
   return (

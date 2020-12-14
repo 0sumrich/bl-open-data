@@ -1,6 +1,6 @@
 import { useEffect, useState, Children } from 'react'
 import classNames from 'classnames';
-import { groupDataByItemType, dataDates, getHeight } from '../functions/loansHelp'
+import { groupDataByLibrary, dataDates, getHeight } from '../functions/loansHelp'
 import { makeStyles } from '@material-ui/core/styles';
 import { Typography } from '@material-ui/core';
 import ChartTip from './chartTip'
@@ -60,9 +60,9 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
-function LoansByItemType({ data, title }) {
+function LoansByLibrary({ data, title }) {
     const id = 'svg-' + makeId(title)
-    const chartData = dataDates(groupDataByItemType(data))
+    const chartData = dataDates(groupDataByLibrary(data))
     const [width, setWidth] = useState(0)
     const [height, setHeight] = useState(450)
     const [lineTipY, setLineTipY] = useState(height / 2)
@@ -72,7 +72,7 @@ function LoansByItemType({ data, title }) {
     const [circleTipVisible, setCircleTipVisible] = useState(false)
     const [circleTipText, setCircleTipText] = useState({ type: '', month: '', loans: '' })
     const [selected, setSelected] = useState([])
-    const margin = { top: 65, right: 60, bottom: 30, left: 85};
+    const margin = { top: 65, right: 10, bottom: 30, left: 75 };
     const classes = useStyles()
 
     useEffect(() => {
@@ -184,4 +184,4 @@ function LoansByItemType({ data, title }) {
     )
 }
 
-export default LoansByItemType
+export default LoansByLibrary

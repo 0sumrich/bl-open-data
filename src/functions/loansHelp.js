@@ -1,8 +1,8 @@
 import { rollup, sum } from 'd3-array';
 import { keepKeys } from './helper';
-import { endOfMonth } from '../functions/helper';
+import { endOfMonth } from './helper';
 
-export function groupData(initData) {
+export function groupDataByItemType(initData) {
 	const keys = ['Month', 'Type', 'Loans'];
 	const data = keepKeys(initData.data, keys);
 	return Array.from(
@@ -14,6 +14,22 @@ export function groupData(initData) {
 		),
 		([Type, m]) => ({
 			Type, data: Array.from(m, ([Month, Loans]) => ({ Month, Loans }))
+		})
+	);
+}
+
+export function groupDataByLibrary(initData) {
+	const keys = ['Month', 'Library name', 'Loans'];
+	const data = keepKeys(initData.data, keys);
+	return Array.from(
+		rollup(
+			data,
+			d => sum(d.map(d => +d.Loans)),
+			d => d['Library name'],
+			d => d.Month
+		),
+		([library, m]) => ({
+            library, data: Array.from(m, ([Month, Loans]) => ({ Month, Loans }))
 		})
 	);
 }
