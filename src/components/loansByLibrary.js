@@ -91,7 +91,7 @@ function LoansByLibrary({ data, title }) {
     const line = d3.line()
         .x(d => x(d.Month))
         .y(d => y(d.Loans))
-    const c = d3.scaleOrdinal().domain(chartData.map(o => o.Type)).range(d3.schemeTableau10)
+    const c = d3.scaleOrdinal().domain(chartData.map(o => o.library)).range(d3.schemeTableau10)
 
     return (
         <>
@@ -105,27 +105,27 @@ function LoansByLibrary({ data, title }) {
                             chartData.map(r =>
                                 (<>
                                     <path
-                                        className={classNames(classes.line, { [classes.selected]: selected.includes(r.Type) })}
-                                        stroke={c(r.Type)}
+                                        className={classNames(classes.line, { [classes.selected]: selected.includes(r.library) })}
+                                        stroke={c(r.library)}
                                         d={line(r.data)}
                                         onMouseEnter={() => {
                                             setLineTipY(y(getHeight(r.data)))
                                             setLineTipVisible(true)
-                                            setLineTipText(r.Type)
+                                            setLineTipText(r.library)
                                         }}
                                         onMouseLeave={() => {
                                             setLineTipVisible(false)
                                         }}
                                         onClick={() => {
                                             // let arr = selected
-                                            if (!selected.includes(r.Type)) {
-                                                setSelected([...selected, r.Type])
+                                            if (!selected.includes(r.library)) {
+                                                setSelected([...selected, r.library])
                                             } else {
-                                                setSelected(selected.filter(x => x !== r.Type))
+                                                setSelected(selected.filter(x => x !== r.library))
                                             }
 
                                         }}
-                                        strokeOpacity={selected.includes(r.Type) || selected.length < 1 ? 1 : 0.2}
+                                        strokeOpacity={selected.includes(r.library) || selected.length < 1 ? 1 : 0.2}
                                     />
                                     <g>
                                         {Children.toArray(
@@ -135,13 +135,13 @@ function LoansByLibrary({ data, title }) {
                                                     r={1.5}
                                                     cx={x(d.Month)}
                                                     cy={y(d.Loans)}
-                                                    fill={c(r.Type)}
+                                                    fill={c(r.library)}
                                                     onMouseEnter={e => {
                                                         e.currentTarget.setAttribute('r', 3)
-                                                        setCircleTipPos([x(d.Month), y(d.Loans)])
+                                                        setCircleTipPos([x(d.Month), y(r.library)])
                                                         setCircleTipVisible(true)
                                                         setCircleTipText({
-                                                            type: r.Type,
+                                                            type: r.library,
                                                             month: d.Month,
                                                             loans: d.Loans
                                                         })

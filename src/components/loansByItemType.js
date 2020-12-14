@@ -117,7 +117,6 @@ function LoansByItemType({ data, title }) {
                                             setLineTipVisible(false)
                                         }}
                                         onClick={() => {
-                                            // let arr = selected
                                             if (!selected.includes(r.Type)) {
                                                 setSelected([...selected, r.Type])
                                             } else {
