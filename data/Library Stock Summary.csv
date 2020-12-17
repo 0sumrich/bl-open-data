@@ -1,0 +1,436 @@
+Local authority,Library name,Count date,Type,Items
+Barnet,Barnet Book Club,2020-12-01,Adult fiction,2
+Barnet,Barnet Book Club,2020-12-01,Adult non fiction,1
+Barnet,Barnet Book Club,2020-12-01,Adult reference,1
+Barnet,Barnet Book Club,2020-12-01,Barnet Book Club,2306
+Barnet,Barnet Book Club,2020-12-01,Large print adult fiction,1
+Barnet,Barnet Book Club,2020-12-01,Teenage fiction,1
+Barnet,Bibliographic Services,2020-12-01,Adult audiobook,12
+Barnet,Bibliographic Services,2020-12-01,Adult fiction,38
+Barnet,Bibliographic Services,2020-12-01,Adult non fiction,187
+Barnet,Bibliographic Services,2020-12-01,Adult reference,19
+Barnet,Bibliographic Services,2020-12-01,British library ILL,8
+Barnet,Bibliographic Services,2020-12-01,Children's fiction,42
+Barnet,Bibliographic Services,2020-12-01,Children's non fiction,38
+Barnet,Bibliographic Services,2020-12-01,Children's reference,5
+Barnet,Bibliographic Services,2020-12-01,Compact disc,8
+Barnet,Bibliographic Services,2020-12-01,DVD certificate 12,6
+Barnet,Bibliographic Services,2020-12-01,DVD certificate 15,13
+Barnet,Bibliographic Services,2020-12-01,DVD certificate 18+,4
+Barnet,Bibliographic Services,2020-12-01,DVD certificate exempt,3
+Barnet,Bibliographic Services,2020-12-01,DVD certificate PG,6
+Barnet,Bibliographic Services,2020-12-01,DVD certificate U,17
+Barnet,Bibliographic Services,2020-12-01,Large print adult fiction,18
+Barnet,Bibliographic Services,2020-12-01,Large print adult non fiction,3
+Barnet,Bibliographic Services,2020-12-01,Music score,1
+Barnet,Bibliographic Services,2020-12-01,Playset,1
+Barnet,Bibliographic Services,2020-12-01,SLS Fiction,1
+Barnet,Bibliographic Services,2020-12-01,Teenage fiction,4
+Barnet,Bibliographic Services,2020-12-01,Teenage non fiction,3
+Barnet,Bibliographic Services,2020-12-01,Vocal score sets,1
+Barnet,Burnt Oak,2020-12-01,Adult audiobook,230
+Barnet,Burnt Oak,2020-12-01,Adult fiction,3034
+Barnet,Burnt Oak,2020-12-01,Adult non fiction,2782
+Barnet,Burnt Oak,2020-12-01,Adult reference,375
+Barnet,Burnt Oak,2020-12-01,Barnet Book Club,6
+Barnet,Burnt Oak,2020-12-01,Children's audiobook,2
+Barnet,Burnt Oak,2020-12-01,Children's fiction,4190
+Barnet,Burnt Oak,2020-12-01,Children's non fiction,1231
+Barnet,Burnt Oak,2020-12-01,Children's reference,59
+Barnet,Burnt Oak,2020-12-01,Compact disc,44
+Barnet,Burnt Oak,2020-12-01,DVD certificate 12,156
+Barnet,Burnt Oak,2020-12-01,DVD certificate 15,138
+Barnet,Burnt Oak,2020-12-01,DVD certificate 18+,24
+Barnet,Burnt Oak,2020-12-01,DVD certificate exempt,7
+Barnet,Burnt Oak,2020-12-01,DVD certificate PG,63
+Barnet,Burnt Oak,2020-12-01,DVD certificate U,278
+Barnet,Burnt Oak,2020-12-01,Electronic devices,10
+Barnet,Burnt Oak,2020-12-01,Language learning,7
+Barnet,Burnt Oak,2020-12-01,Large print adult fiction,212
+Barnet,Burnt Oak,2020-12-01,Large print adult non fiction,21
+Barnet,Burnt Oak,2020-12-01,Reference,6
+Barnet,Burnt Oak,2020-12-01,Teenage fiction,645
+Barnet,Burnt Oak,2020-12-01,Teenage non fiction,375
+Barnet,Childs Hill,2020-12-01,Adult audiobook,308
+Barnet,Childs Hill,2020-12-01,Adult fiction,2618
+Barnet,Childs Hill,2020-12-01,Adult non fiction,2244
+Barnet,Childs Hill,2020-12-01,Adult reference,249
+Barnet,Childs Hill,2020-12-01,Barnet Book Club,2
+Barnet,Childs Hill,2020-12-01,Children's audiobook,5
+Barnet,Childs Hill,2020-12-01,Children's fiction,4439
+Barnet,Childs Hill,2020-12-01,Children's non fiction,730
+Barnet,Childs Hill,2020-12-01,Children's reference,40
+Barnet,Childs Hill,2020-12-01,Compact disc,54
+Barnet,Childs Hill,2020-12-01,DVD certificate 12,91
+Barnet,Childs Hill,2020-12-01,DVD certificate 15,66
+Barnet,Childs Hill,2020-12-01,DVD certificate 18+,8
+Barnet,Childs Hill,2020-12-01,DVD certificate exempt,4
+Barnet,Childs Hill,2020-12-01,DVD certificate PG,40
+Barnet,Childs Hill,2020-12-01,DVD certificate U,125
+Barnet,Childs Hill,2020-12-01,Electronic devices,10
+Barnet,Childs Hill,2020-12-01,Language learning,5
+Barnet,Childs Hill,2020-12-01,Large print adult fiction,376
+Barnet,Childs Hill,2020-12-01,Large print adult non fiction,28
+Barnet,Childs Hill,2020-12-01,Playset,4
+Barnet,Childs Hill,2020-12-01,Reference,6
+Barnet,Childs Hill,2020-12-01,Teenage fiction,587
+Barnet,Childs Hill,2020-12-01,Teenage non fiction,169
+Barnet,Chipping Barnet,2020-12-01,Adult audiobook,570
+Barnet,Chipping Barnet,2020-12-01,Adult fiction,10985
+Barnet,Chipping Barnet,2020-12-01,Adult non fiction,14336
+Barnet,Chipping Barnet,2020-12-01,Adult reference,1495
+Barnet,Chipping Barnet,2020-12-01,Barnet Book Club,3
+Barnet,Chipping Barnet,2020-12-01,British library ILL,1
+Barnet,Chipping Barnet,2020-12-01,Children's audiobook,91
+Barnet,Chipping Barnet,2020-12-01,Children's fiction,11104
+Barnet,Chipping Barnet,2020-12-01,Children's non fiction,3591
+Barnet,Chipping Barnet,2020-12-01,Children's reference,60
+Barnet,Chipping Barnet,2020-12-01,Compact disc,1827
+Barnet,Chipping Barnet,2020-12-01,DVD certificate 12,592
+Barnet,Chipping Barnet,2020-12-01,DVD certificate 15,848
+Barnet,Chipping Barnet,2020-12-01,DVD certificate 18+,177
+Barnet,Chipping Barnet,2020-12-01,DVD certificate exempt,30
+Barnet,Chipping Barnet,2020-12-01,DVD certificate PG,123
+Barnet,Chipping Barnet,2020-12-01,DVD certificate U,480
+Barnet,Chipping Barnet,2020-12-01,Electronic devices,10
+Barnet,Chipping Barnet,2020-12-01,Language learning,34
+Barnet,Chipping Barnet,2020-12-01,Large print adult fiction,679
+Barnet,Chipping Barnet,2020-12-01,Large print adult non fiction,138
+Barnet,Chipping Barnet,2020-12-01,Large print children's fiction,3
+Barnet,Chipping Barnet,2020-12-01,Music score,100
+Barnet,Chipping Barnet,2020-12-01,Playset,2
+Barnet,Chipping Barnet,2020-12-01,Reference,24
+Barnet,Chipping Barnet,2020-12-01,Teenage fiction,2370
+Barnet,Chipping Barnet,2020-12-01,Teenage non fiction,784
+Barnet,Chipping Barnet,2020-12-01,Vocal score sets,1
+Barnet,Colindale,2020-12-01,Adult audiobook,283
+Barnet,Colindale,2020-12-01,Adult fiction,2759
+Barnet,Colindale,2020-12-01,Adult non fiction,3750
+Barnet,Colindale,2020-12-01,Adult reference,308
+Barnet,Colindale,2020-12-01,Barnet Book Club,3
+Barnet,Colindale,2020-12-01,Children's audiobook,2
+Barnet,Colindale,2020-12-01,Children's fiction,5172
+Barnet,Colindale,2020-12-01,Children's non fiction,1378
+Barnet,Colindale,2020-12-01,Children's reference,66
+Barnet,Colindale,2020-12-01,Compact disc,27
+Barnet,Colindale,2020-12-01,DVD certificate 12,208
+Barnet,Colindale,2020-12-01,DVD certificate 15,207
+Barnet,Colindale,2020-12-01,DVD certificate 18+,23
+Barnet,Colindale,2020-12-01,DVD certificate exempt,1
+Barnet,Colindale,2020-12-01,DVD certificate PG,44
+Barnet,Colindale,2020-12-01,DVD certificate U,184
+Barnet,Colindale,2020-12-01,Electronic devices,10
+Barnet,Colindale,2020-12-01,Language learning,4
+Barnet,Colindale,2020-12-01,Large print adult fiction,191
+Barnet,Colindale,2020-12-01,Large print adult non fiction,37
+Barnet,Colindale,2020-12-01,Reference,15
+Barnet,Colindale,2020-12-01,SLS Non Fiction,8
+Barnet,Colindale,2020-12-01,Teenage fiction,682
+Barnet,Colindale,2020-12-01,Teenage non fiction,376
+Barnet,Customer Services Organisation,2020-12-01,Adult fiction,4
+Barnet,Customer Services Organisation,2020-12-01,Adult non fiction,9
+Barnet,Customer Services Organisation,2020-12-01,Adult reference,1
+Barnet,Customer Services Organisation,2020-12-01,Children's fiction,8
+Barnet,Customer Services Organisation,2020-12-01,Children's non fiction,1
+Barnet,Customer Services Organisation,2020-12-01,DVD certificate 12,1
+Barnet,Customer Services Organisation,2020-12-01,DVD certificate 15,1
+Barnet,Customer Services Organisation,2020-12-01,DVD certificate U,1
+Barnet,Customer Services Organisation,2020-12-01,Teenage non fiction,1
+Barnet,Early Years Team,2020-12-01,Adult non fiction,2
+Barnet,Early Years Team,2020-12-01,Children's fiction,275
+Barnet,Early Years Team,2020-12-01,Children's non fiction,32
+Barnet,Early Years Team,2020-12-01,Children's reference,2
+Barnet,Early Years Team,2020-12-01,SLS Fiction,3
+Barnet,Early Years Team,2020-12-01,SLS Non Fiction,3
+Barnet,East Finchley,2020-12-01,Adult audiobook,226
+Barnet,East Finchley,2020-12-01,Adult fiction,3659
+Barnet,East Finchley,2020-12-01,Adult non fiction,4272
+Barnet,East Finchley,2020-12-01,Adult reference,480
+Barnet,East Finchley,2020-12-01,Barnet Book Club,2
+Barnet,East Finchley,2020-12-01,Children's audiobook,1
+Barnet,East Finchley,2020-12-01,Children's fiction,5119
+Barnet,East Finchley,2020-12-01,Children's non fiction,1839
+Barnet,East Finchley,2020-12-01,Children's reference,45
+Barnet,East Finchley,2020-12-01,Compact disc,1192
+Barnet,East Finchley,2020-12-01,DVD certificate 12,239
+Barnet,East Finchley,2020-12-01,DVD certificate 15,228
+Barnet,East Finchley,2020-12-01,DVD certificate 18+,50
+Barnet,East Finchley,2020-12-01,DVD certificate exempt,5
+Barnet,East Finchley,2020-12-01,DVD certificate PG,41
+Barnet,East Finchley,2020-12-01,DVD certificate U,212
+Barnet,East Finchley,2020-12-01,Electronic devices,10
+Barnet,East Finchley,2020-12-01,Language learning,18
+Barnet,East Finchley,2020-12-01,Large print adult fiction,177
+Barnet,East Finchley,2020-12-01,Large print adult non fiction,18
+Barnet,East Finchley,2020-12-01,Large print children's fiction,2
+Barnet,East Finchley,2020-12-01,Music score,52
+Barnet,East Finchley,2020-12-01,Reference,6
+Barnet,East Finchley,2020-12-01,Schools - Braille,1
+Barnet,East Finchley,2020-12-01,Teenage fiction,620
+Barnet,East Finchley,2020-12-01,Teenage non fiction,1122
+Barnet,Edgware,2020-12-01,Adult audiobook,292
+Barnet,Edgware,2020-12-01,Adult fiction,5700
+Barnet,Edgware,2020-12-01,Adult non fiction,6597
+Barnet,Edgware,2020-12-01,Adult reference,712
+Barnet,Edgware,2020-12-01,Barnet Book Club,5
+Barnet,Edgware,2020-12-01,Children's audiobook,1
+Barnet,Edgware,2020-12-01,Children's fiction,7943
+Barnet,Edgware,2020-12-01,Children's non fiction,2222
+Barnet,Edgware,2020-12-01,Children's reference,82
+Barnet,Edgware,2020-12-01,Compact disc,46
+Barnet,Edgware,2020-12-01,DVD certificate 12,286
+Barnet,Edgware,2020-12-01,DVD certificate 15,320
+Barnet,Edgware,2020-12-01,DVD certificate 18+,81
+Barnet,Edgware,2020-12-01,DVD certificate exempt,7
+Barnet,Edgware,2020-12-01,DVD certificate PG,69
+Barnet,Edgware,2020-12-01,DVD certificate U,269
+Barnet,Edgware,2020-12-01,Electronic devices,10
+Barnet,Edgware,2020-12-01,Language learning,22
+Barnet,Edgware,2020-12-01,Large print adult fiction,327
+Barnet,Edgware,2020-12-01,Large print adult non fiction,28
+Barnet,Edgware,2020-12-01,Large print children's fiction,31
+Barnet,Edgware,2020-12-01,Music score,5
+Barnet,Edgware,2020-12-01,Periodical,155
+Barnet,Edgware,2020-12-01,Reference,12
+Barnet,Edgware,2020-12-01,SLS DVD,1
+Barnet,Edgware,2020-12-01,Teenage fiction,1287
+Barnet,Edgware,2020-12-01,Teenage non fiction,490
+Barnet,Edgware,2020-12-01,Vocal score sets,8352
+Barnet,Finchley Church End,2020-12-01,Adult audiobook,338
+Barnet,Finchley Church End,2020-12-01,Adult fiction,5500
+Barnet,Finchley Church End,2020-12-01,Adult non fiction,5828
+Barnet,Finchley Church End,2020-12-01,Adult reference,867
+Barnet,Finchley Church End,2020-12-01,Barnet Book Club,1
+Barnet,Finchley Church End,2020-12-01,Children's audiobook,7
+Barnet,Finchley Church End,2020-12-01,Children's fiction,7547
+Barnet,Finchley Church End,2020-12-01,Children's non fiction,2303
+Barnet,Finchley Church End,2020-12-01,Children's reference,33
+Barnet,Finchley Church End,2020-12-01,Compact disc,56
+Barnet,Finchley Church End,2020-12-01,DVD certificate 12,262
+Barnet,Finchley Church End,2020-12-01,DVD certificate 15,339
+Barnet,Finchley Church End,2020-12-01,DVD certificate 18+,71
+Barnet,Finchley Church End,2020-12-01,DVD certificate exempt,26
+Barnet,Finchley Church End,2020-12-01,DVD certificate PG,81
+Barnet,Finchley Church End,2020-12-01,DVD certificate U,233
+Barnet,Finchley Church End,2020-12-01,Electronic devices,10
+Barnet,Finchley Church End,2020-12-01,Language learning,28
+Barnet,Finchley Church End,2020-12-01,Large print adult fiction,266
+Barnet,Finchley Church End,2020-12-01,Large print adult non fiction,34
+Barnet,Finchley Church End,2020-12-01,Music score,9
+Barnet,Finchley Church End,2020-12-01,Playset,5342
+Barnet,Finchley Church End,2020-12-01,Reference,16
+Barnet,Finchley Church End,2020-12-01,Teenage fiction,1089
+Barnet,Finchley Church End,2020-12-01,Teenage non fiction,507
+Barnet,Golders Green,2020-12-01,Adult audiobook,204
+Barnet,Golders Green,2020-12-01,Adult fiction,3613
+Barnet,Golders Green,2020-12-01,Adult non fiction,3534
+Barnet,Golders Green,2020-12-01,Adult reference,442
+Barnet,Golders Green,2020-12-01,Barnet Book Club,3
+Barnet,Golders Green,2020-12-01,Children's audiobook,6
+Barnet,Golders Green,2020-12-01,Children's fiction,4970
+Barnet,Golders Green,2020-12-01,Children's non fiction,1417
+Barnet,Golders Green,2020-12-01,Children's reference,70
+Barnet,Golders Green,2020-12-01,Compact disc,75
+Barnet,Golders Green,2020-12-01,DVD certificate 12,165
+Barnet,Golders Green,2020-12-01,DVD certificate 15,144
+Barnet,Golders Green,2020-12-01,DVD certificate 18+,16
+Barnet,Golders Green,2020-12-01,DVD certificate exempt,8
+Barnet,Golders Green,2020-12-01,DVD certificate PG,51
+Barnet,Golders Green,2020-12-01,DVD certificate U,197
+Barnet,Golders Green,2020-12-01,Electronic devices,10
+Barnet,Golders Green,2020-12-01,Language learning,9
+Barnet,Golders Green,2020-12-01,Large print adult fiction,202
+Barnet,Golders Green,2020-12-01,Large print adult non fiction,29
+Barnet,Golders Green,2020-12-01,Music score,4
+Barnet,Golders Green,2020-12-01,Reference,7
+Barnet,Golders Green,2020-12-01,Teenage fiction,966
+Barnet,Golders Green,2020-12-01,Teenage non fiction,259
+Barnet,Hendon,2020-12-01,Adult audiobook,341
+Barnet,Hendon,2020-12-01,Adult fiction,4627
+Barnet,Hendon,2020-12-01,Adult non fiction,4604
+Barnet,Hendon,2020-12-01,Adult reference,992
+Barnet,Hendon,2020-12-01,Barnet Book Club,1
+Barnet,Hendon,2020-12-01,Children's audiobook,6
+Barnet,Hendon,2020-12-01,Children's fiction,6324
+Barnet,Hendon,2020-12-01,Children's non fiction,1910
+Barnet,Hendon,2020-12-01,Children's reference,20
+Barnet,Hendon,2020-12-01,Compact disc,129
+Barnet,Hendon,2020-12-01,DVD certificate 12,235
+Barnet,Hendon,2020-12-01,DVD certificate 15,226
+Barnet,Hendon,2020-12-01,DVD certificate 18+,38
+Barnet,Hendon,2020-12-01,DVD certificate exempt,10
+Barnet,Hendon,2020-12-01,DVD certificate PG,44
+Barnet,Hendon,2020-12-01,DVD certificate U,274
+Barnet,Hendon,2020-12-01,Electronic devices,10
+Barnet,Hendon,2020-12-01,Language learning,33
+Barnet,Hendon,2020-12-01,Large print adult fiction,364
+Barnet,Hendon,2020-12-01,Large print adult non fiction,55
+Barnet,Hendon,2020-12-01,Large print children's fiction,18
+Barnet,Hendon,2020-12-01,Music score,55
+Barnet,Hendon,2020-12-01,Reference,6
+Barnet,Hendon,2020-12-01,Teenage fiction,911
+Barnet,Hendon,2020-12-01,Teenage non fiction,357
+Barnet,Hendon,2020-12-01,Vocal score sets,1
+Barnet,Home Library Service,2020-12-01,Adult audiobook,1
+Barnet,Home Library Service,2020-12-01,Adult fiction,41
+Barnet,Home Library Service,2020-12-01,Adult non fiction,22
+Barnet,Home Library Service,2020-12-01,Children's fiction,1
+Barnet,Home Library Service,2020-12-01,Compact disc,2
+Barnet,Home Library Service,2020-12-01,DVD certificate 15,1
+Barnet,Home Library Service,2020-12-01,Language learning,1
+Barnet,Home Library Service,2020-12-01,Large print adult fiction,1256
+Barnet,Home Library Service,2020-12-01,Large print adult non fiction,49
+Barnet,Local Studies and Archives,2020-12-01,Adult non fiction,62
+Barnet,Local Studies and Archives,2020-12-01,Adult reference,2195
+Barnet,Local Studies and Archives,2020-12-01,Children's non fiction,1
+Barnet,Local Studies and Archives,2020-12-01,Children's reference,1
+Barnet,Mill Hill,2020-12-01,Adult audiobook,203
+Barnet,Mill Hill,2020-12-01,Adult fiction,3453
+Barnet,Mill Hill,2020-12-01,Adult non fiction,2608
+Barnet,Mill Hill,2020-12-01,Adult reference,406
+Barnet,Mill Hill,2020-12-01,Barnet Book Club,4
+Barnet,Mill Hill,2020-12-01,Children's audiobook,2
+Barnet,Mill Hill,2020-12-01,Children's fiction,5942
+Barnet,Mill Hill,2020-12-01,Children's non fiction,1869
+Barnet,Mill Hill,2020-12-01,Children's reference,63
+Barnet,Mill Hill,2020-12-01,Compact disc,84
+Barnet,Mill Hill,2020-12-01,DVD certificate 12,91
+Barnet,Mill Hill,2020-12-01,DVD certificate 15,100
+Barnet,Mill Hill,2020-12-01,DVD certificate 18+,5
+Barnet,Mill Hill,2020-12-01,DVD certificate exempt,6
+Barnet,Mill Hill,2020-12-01,DVD certificate PG,83
+Barnet,Mill Hill,2020-12-01,DVD certificate U,264
+Barnet,Mill Hill,2020-12-01,Electronic devices,10
+Barnet,Mill Hill,2020-12-01,Language learning,14
+Barnet,Mill Hill,2020-12-01,Large print adult fiction,212
+Barnet,Mill Hill,2020-12-01,Large print adult non fiction,29
+Barnet,Mill Hill,2020-12-01,Playset,63
+Barnet,Mill Hill,2020-12-01,Reference,6
+Barnet,Mill Hill,2020-12-01,Teenage fiction,726
+Barnet,Mill Hill,2020-12-01,Teenage non fiction,194
+Barnet,Mobile Library,2020-12-01,Adult audiobook,7
+Barnet,Mobile Library,2020-12-01,Adult fiction,30
+Barnet,Mobile Library,2020-12-01,Adult non fiction,32
+Barnet,Mobile Library,2020-12-01,Children's fiction,43
+Barnet,Mobile Library,2020-12-01,Children's non fiction,6
+Barnet,Mobile Library,2020-12-01,Compact disc,4
+Barnet,Mobile Library,2020-12-01,DVD certificate 12,6
+Barnet,Mobile Library,2020-12-01,DVD certificate 15,7
+Barnet,Mobile Library,2020-12-01,DVD certificate PG,2
+Barnet,Mobile Library,2020-12-01,DVD certificate U,10
+Barnet,Mobile Library,2020-12-01,Large print adult fiction,29
+Barnet,Mobile Library,2020-12-01,Large print adult non fiction,12
+Barnet,Mobile Library,2020-12-01,Teenage fiction,4
+Barnet,Mobile Library,2020-12-01,Teenage non fiction,2
+Barnet,New Barnet library,2020-12-01,Adult audiobook,193
+Barnet,New Barnet library,2020-12-01,Adult fiction,2555
+Barnet,New Barnet library,2020-12-01,Adult non fiction,2216
+Barnet,New Barnet library,2020-12-01,Adult reference,755
+Barnet,New Barnet library,2020-12-01,Barnet Book Club,3
+Barnet,New Barnet library,2020-12-01,Children's audiobook,2
+Barnet,New Barnet library,2020-12-01,Children's fiction,4474
+Barnet,New Barnet library,2020-12-01,Children's non fiction,1128
+Barnet,New Barnet library,2020-12-01,Children's reference,68
+Barnet,New Barnet library,2020-12-01,Compact disc,38
+Barnet,New Barnet library,2020-12-01,DVD certificate 12,100
+Barnet,New Barnet library,2020-12-01,DVD certificate 15,127
+Barnet,New Barnet library,2020-12-01,DVD certificate 18+,8
+Barnet,New Barnet library,2020-12-01,DVD certificate exempt,6
+Barnet,New Barnet library,2020-12-01,DVD certificate PG,55
+Barnet,New Barnet library,2020-12-01,DVD certificate U,172
+Barnet,New Barnet library,2020-12-01,Electronic devices,10
+Barnet,New Barnet library,2020-12-01,Language learning,5
+Barnet,New Barnet library,2020-12-01,Large print adult fiction,218
+Barnet,New Barnet library,2020-12-01,Large print adult non fiction,17
+Barnet,New Barnet library,2020-12-01,Music score,8
+Barnet,New Barnet library,2020-12-01,Reference,5
+Barnet,New Barnet library,2020-12-01,Teenage fiction,518
+Barnet,New Barnet library,2020-12-01,Teenage non fiction,181
+Barnet,North Finchley,2020-12-01,Adult audiobook,151
+Barnet,North Finchley,2020-12-01,Adult fiction,3572
+Barnet,North Finchley,2020-12-01,Adult non fiction,3535
+Barnet,North Finchley,2020-12-01,Adult reference,370
+Barnet,North Finchley,2020-12-01,Barnet Book Club,1
+Barnet,North Finchley,2020-12-01,Children's audiobook,6
+Barnet,North Finchley,2020-12-01,Children's fiction,6453
+Barnet,North Finchley,2020-12-01,Children's non fiction,1493
+Barnet,North Finchley,2020-12-01,Children's reference,104
+Barnet,North Finchley,2020-12-01,Compact disc,34
+Barnet,North Finchley,2020-12-01,DVD certificate 12,200
+Barnet,North Finchley,2020-12-01,DVD certificate 15,176
+Barnet,North Finchley,2020-12-01,DVD certificate 18+,40
+Barnet,North Finchley,2020-12-01,DVD certificate exempt,5
+Barnet,North Finchley,2020-12-01,DVD certificate PG,29
+Barnet,North Finchley,2020-12-01,DVD certificate U,227
+Barnet,North Finchley,2020-12-01,Electronic devices,10
+Barnet,North Finchley,2020-12-01,Language learning,12
+Barnet,North Finchley,2020-12-01,Large print adult fiction,193
+Barnet,North Finchley,2020-12-01,Large print adult non fiction,18
+Barnet,North Finchley,2020-12-01,Large print children's fiction,21
+Barnet,North Finchley,2020-12-01,Music score,6
+Barnet,North Finchley,2020-12-01,Reference,10
+Barnet,North Finchley,2020-12-01,Teenage fiction,778
+Barnet,North Finchley,2020-12-01,Teenage non fiction,337
+Barnet,Osidge,2020-12-01,Adult audiobook,1503
+Barnet,Osidge,2020-12-01,Adult fiction,4056
+Barnet,Osidge,2020-12-01,Adult non fiction,3419
+Barnet,Osidge,2020-12-01,Adult reference,594
+Barnet,Osidge,2020-12-01,Barnet Book Club,6
+Barnet,Osidge,2020-12-01,Children's audiobook,6
+Barnet,Osidge,2020-12-01,Children's fiction,6110
+Barnet,Osidge,2020-12-01,Children's non fiction,1946
+Barnet,Osidge,2020-12-01,Children's reference,33
+Barnet,Osidge,2020-12-01,Compact disc,522
+Barnet,Osidge,2020-12-01,DVD certificate 12,273
+Barnet,Osidge,2020-12-01,DVD certificate 15,246
+Barnet,Osidge,2020-12-01,DVD certificate 18+,40
+Barnet,Osidge,2020-12-01,DVD certificate exempt,12
+Barnet,Osidge,2020-12-01,DVD certificate PG,142
+Barnet,Osidge,2020-12-01,DVD certificate U,309
+Barnet,Osidge,2020-12-01,Electronic devices,10
+Barnet,Osidge,2020-12-01,Language learning,8
+Barnet,Osidge,2020-12-01,Large print adult fiction,2265
+Barnet,Osidge,2020-12-01,Large print adult non fiction,304
+Barnet,Osidge,2020-12-01,Music score,1
+Barnet,Osidge,2020-12-01,Reference,5
+Barnet,Osidge,2020-12-01,SLS Fiction,2
+Barnet,Osidge,2020-12-01,Teenage fiction,581
+Barnet,Osidge,2020-12-01,Teenage non fiction,281
+Barnet,Schools Library Resources Service,2020-12-01,Adult fiction,16
+Barnet,Schools Library Resources Service,2020-12-01,Adult non fiction,15
+Barnet,Schools Library Resources Service,2020-12-01,Children's fiction,110
+Barnet,Schools Library Resources Service,2020-12-01,Children's non fiction,21
+Barnet,Schools Library Resources Service,2020-12-01,SLS Artefact,4745
+Barnet,Schools Library Resources Service,2020-12-01,SLS Audio,51
+Barnet,Schools Library Resources Service,2020-12-01,SLS CD,188
+Barnet,Schools Library Resources Service,2020-12-01,SLS DVD,603
+Barnet,Schools Library Resources Service,2020-12-01,SLS Fiction,23084
+Barnet,Schools Library Resources Service,2020-12-01,SLS Map,125
+Barnet,Schools Library Resources Service,2020-12-01,SLS Non Fiction,55979
+Barnet,Schools Library Resources Service,2020-12-01,SLS Picture,3861
+Barnet,Schools Library Resources Service,2020-12-01,SLS Poster,1907
+Barnet,Schools Library Resources Service,2020-12-01,SLS Resource Pack,556
+Barnet,Schools Library Resources Service,2020-12-01,Teenage fiction,1
+Barnet,South Friern,2020-12-01,Adult audiobook,134
+Barnet,South Friern,2020-12-01,Adult fiction,2246
+Barnet,South Friern,2020-12-01,Adult non fiction,1449
+Barnet,South Friern,2020-12-01,Adult reference,59
+Barnet,South Friern,2020-12-01,Barnet Book Club,3
+Barnet,South Friern,2020-12-01,Children's audiobook,6
+Barnet,South Friern,2020-12-01,Children's fiction,4015
+Barnet,South Friern,2020-12-01,Children's non fiction,620
+Barnet,South Friern,2020-12-01,Children's reference,5
+Barnet,South Friern,2020-12-01,Compact disc,38
+Barnet,South Friern,2020-12-01,DVD certificate 12,106
+Barnet,South Friern,2020-12-01,DVD certificate 15,95
+Barnet,South Friern,2020-12-01,DVD certificate 18+,19
+Barnet,South Friern,2020-12-01,DVD certificate exempt,2
+Barnet,South Friern,2020-12-01,DVD certificate PG,62
+Barnet,South Friern,2020-12-01,DVD certificate U,174
+Barnet,South Friern,2020-12-01,Electronic devices,10
+Barnet,South Friern,2020-12-01,Language learning,14
+Barnet,South Friern,2020-12-01,Large print adult fiction,91
+Barnet,South Friern,2020-12-01,Large print adult non fiction,7
+Barnet,South Friern,2020-12-01,Reference,5
+Barnet,South Friern,2020-12-01,Teenage fiction,458
+Barnet,South Friern,2020-12-01,Teenage non fiction,172
