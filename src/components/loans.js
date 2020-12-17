@@ -1,6 +1,6 @@
 import { useEffect, useState, Children } from 'react'
 import classNames from 'classnames';
-import { groupDataByLibrary, dataDates, getHeight } from '../functions/loansHelp'
+import {getHeight } from '../functions/loansHelp'
 import { makeStyles } from '@material-ui/core/styles';
 import { Typography } from '@material-ui/core';
 import ChartTip from './chartTip'
@@ -59,10 +59,10 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-
-function LoansByLibrary({ data, title }) {
+function Loans({ data, title }) {
     const id = 'svg-' + makeId(title)
-    const chartData = dataDates(groupDataByLibrary(data))
+    const dataKey = Object.keys(data[0]).filter(o => o!=='data')
+    // const chartData = dataDates(groupFunction(data))
     const [width, setWidth] = useState(0)
     const [height, setHeight] = useState(450)
     const [lineTipY, setLineTipY] = useState(height / 2)
@@ -70,9 +70,9 @@ function LoansByLibrary({ data, title }) {
     const [lineTipText, setLineTipText] = useState("")
     const [circleTipPos, setCircleTipPos] = useState([width / 2, height / 2])
     const [circleTipVisible, setCircleTipVisible] = useState(false)
-    const [circleTipText, setCircleTipText] = useState({ type: '', month: '', loans: '' })
+    const [circleTipText, setCircleTipText] = useState({ [dataKey]: '', month: '', loans: '' })
     const [selected, setSelected] = useState([])
-    const margin = { top: 65, right: 10, bottom: 30, left: 75 };
+    const margin = { top: 65, right: 60, bottom: 30, left: 85};
     const classes = useStyles()
 
     useEffect(() => {
@@ -80,8 +80,8 @@ function LoansByLibrary({ data, title }) {
         setWidth(parseInt(svg.style('width')) - margin.left - margin.right)
         setHeight(parseInt(svg.style('height')) - margin.top - margin.bottom)
     })
-    const months = chartData.map(o => o.data.map(x => x.Month))[0]
-    const loans = chartData.map(o => o.data.map(x => x.Loans)).flat()
+    const months = data.map(o => o.data.map(x => x.Month))[0]
+    const loans = data.map(o => o.data.map(x => x.Loans)).flat()
     const x = d3.scaleTime()
         .domain(minMax(months))
         .range([0, width])
@@ -91,7 +91,7 @@ function LoansByLibrary({ data, title }) {
     const line = d3.line()
         .x(d => x(d.Month))
         .y(d => y(d.Loans))
-    const c = d3.scaleOrdinal().domain(chartData.map(o => o.library)).range(d3.schemeTableau10)
+    const c = d3.scaleOrdinal().domain(data.map(o => o[dataKey])).range(d3.schemeTableau10)
 
     return (
         <>
@@ -102,30 +102,29 @@ function LoansByLibrary({ data, title }) {
                 }}>
                     <g>
                         {Children.toArray(
-                            chartData.map(r =>
+                            data.map(r =>
                                 (<>
                                     <path
-                                        className={classNames(classes.line, { [classes.selected]: selected.includes(r.library) })}
-                                        stroke={c(r.library)}
+                                        className={classNames(classes.line, { [classes.selected]: selected.includes(r[dataKey]) })}
+                                        stroke={c(r[dataKey])}
                                         d={line(r.data)}
                                         onMouseEnter={() => {
                                             setLineTipY(y(getHeight(r.data)))
                                             setLineTipVisible(true)
-                                            setLineTipText(r.library)
+                                            setLineTipText(r[dataKey])
                                         }}
                                         onMouseLeave={() => {
                                             setLineTipVisible(false)
                                         }}
                                         onClick={() => {
-                                            // let arr = selected
-                                            if (!selected.includes(r.library)) {
-                                                setSelected([...selected, r.library])
+                                            if (!selected.includes(r[dataKey])) {
+                                                setSelected([...selected, r[dataKey]])
                                             } else {
-                                                setSelected(selected.filter(x => x !== r.library))
+                                                setSelected(selected.filter(x => x !== r[dataKey]))
                                             }
 
                                         }}
-                                        strokeOpacity={selected.includes(r.library) || selected.length < 1 ? 1 : 0.2}
+                                        strokeOpacity={selected.includes(r[dataKey]) || selected.length < 1 ? 1 : 0.2}
                                     />
                                     <g>
                                         {Children.toArray(
@@ -135,13 +134,13 @@ function LoansByLibrary({ data, title }) {
                                                     r={1.5}
                                                     cx={x(d.Month)}
                                                     cy={y(d.Loans)}
-                                                    fill={c(r.library)}
+                                                    fill={c(r[dataKey])}
                                                     onMouseEnter={e => {
                                                         e.currentTarget.setAttribute('r', 3)
-                                                        setCircleTipPos([x(d.Month), y(r.library)])
+                                                        setCircleTipPos([x(d.Month), y(d.Loans)])
                                                         setCircleTipVisible(true)
                                                         setCircleTipText({
-                                                            type: r.library,
+                                                            [dataKey]: r[dataKey],
                                                             month: d.Month,
                                                             loans: d.Loans
                                                         })
@@ -175,7 +174,7 @@ function LoansByLibrary({ data, title }) {
             </ChartTip>
             <ChartTip margin={margin} left={circleTipPos[0]} top={circleTipPos[1] - 45} visible={circleTipVisible}>
                 <Typography variant='caption'>
-                    {`${circleTipText.type}`}<br />
+                    {`${circleTipText[dataKey]}`}<br />
                     {`${DateTime.fromJSDate(circleTipText.month).toFormat('MMM y')}`}<br />
                     {`Loans: ${circleTipText.loans}`}
                 </Typography>
@@ -184,4 +183,5 @@ function LoansByLibrary({ data, title }) {
     )
 }
 
-export default LoansByLibrary
+
+export default Loans

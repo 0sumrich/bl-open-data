@@ -4,10 +4,10 @@ import Header from "./components/header"
 import SideNav from './components/sideNav'
 import ContentWrapper from './components/contentWrapper'
 import ChartWrapper from './components/chartWrapper'
-import LoansByItemType from './components/loansByItemType'
-import LoansByLibrary from './components/loansByLibrary'
+import Loans from './components/loans'
 import getData from './functions/getData'
 import { getDataByTitle, makeId } from './functions/helper'
+import {groupDataByItemType, groupDataByLibrary} from './functions/loansHelp'
 
 const isDev = process.env.NODE_ENV === 'development'
 // const isDev = false
@@ -25,15 +25,15 @@ function App() {
 
     fetchData();
   }, []);
-  // const figures = writeFigures(data)
+  
   const charts = [
     {
       title: 'Loans by item type',
-      component: (props) => <LoansByItemType {...props} data={getDataByTitle(data, 'Library loans')} />
+      component: (props) => <Loans {...props} data={groupDataByItemType(getDataByTitle(data, 'Library loans'))} />
     },
     {
       title: 'Loans by library',
-      component: (props) => <LoansByLibrary {...props} data={getDataByTitle(data, 'Library loans')} />
+      component: (props) => <Loans {...props} data={groupDataByLibrary(getDataByTitle(data, 'Library loans'))} />
     }
   ]
   return (
