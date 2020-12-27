@@ -1,13 +1,13 @@
 import { rollup, sum } from 'd3-array';
 import { keepKeys } from './helper';
-import { endOfMonth } from './helper';
+import { jsDate } from './helper';
 
 function dataDates(d) {
 	d.forEach(row => {
 		row.data.forEach(r => {
 			const month = r.Month;
-			const jsDate = endOfMonth(month);
-			r.Month = jsDate;
+			const dt = jsDate(month);
+			r.Month = dt;
 		});
 	});
 	return d;

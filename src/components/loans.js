@@ -162,7 +162,7 @@ function Loans({ data, title }) {
                             ))}
                         </g>
                     </g>
-                    <XAxis height={height} width={width} tickArray={months} tickFunction={t => DateTime.fromJSDate(t).toFormat('MMM yy')} scale={x} />
+                    <XAxis height={height} width={width} tickArray={x.ticks()} tickFunction={t => DateTime.fromJSDate(t).toFormat('MMM yy')} scale={x} />
                     <YAxis height={height} width={width} tickArray={y.ticks()} scale={y} />
                     <text transform="rotate(-90)" x={height/-2} y={-margin.left} dy={'1rem'} style={{textAnchor: 'middle'}}>Loans + renewals</text>
                 </g>

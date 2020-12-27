@@ -9,4 +9,4 @@ export const unpack = (arr, key) => arr.map(o => o[key]);
 export const makeId = str => str.replace(/\s+/g, '-').toLowerCase()
 export const getDataByTitle = (data, title) => data[data.map(o => o.title).indexOf(title)]
 export const minMax = arr => [min(arr), max(arr)]
-export const endOfMonth = monthString => DateTime.fromISO(monthString).plus({ months: 1, days: - 1 }).toJSDate()
+export const jsDate = monthString => DateTime.fromISO(monthString).toJSDate()
